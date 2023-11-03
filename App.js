@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -6,11 +7,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import MainPage from "./src/Pages/MainPage";
 import CalendarPage from "./src/Pages/CalendarPage";
 import SettingPage from "./src/Pages/SettingPage";
+
 import Colors from "./src/Styles/Colors";
 
 const Tab = createBottomTabNavigator()
 
 function App(){
+
   return(
     <NavigationContainer>
       <Tab.Navigator
@@ -23,7 +26,8 @@ function App(){
         }}/>
         <Tab.Screen name="Calendar" component={CalendarPage} options={{
           title: '캘린더',
-          tabBarIcon: ({color, size}) => <Icon name="calendar-today" color={color} size={size}/>
+          tabBarIcon: ({color, size}) => <Icon name="calendar-today" color={color} size={size}/>,
+          headerShown: false
         }}/>
         <Tab.Screen name="Setting" component={SettingPage} options={{
           title: '설정',

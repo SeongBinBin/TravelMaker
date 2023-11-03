@@ -12,6 +12,5 @@ const Colors = {
     green: '#34C85A',
     pink: '#FFC0CB',
     orange: '#FFA500',
-
 }
 export default Colors

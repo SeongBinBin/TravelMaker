@@ -1,29 +1,30 @@
 import React, { useState, useCallback } from 'react'
 import { 
     SafeAreaView, 
-    View, Text, 
-    StyleSheet, 
+    View, Text,
     StatusBar, 
     Button,
     FlatList,
-    Dimensions,
     TouchableWithoutFeedback
 } from 'react-native'
 
 import { getFullCalendar } from '../Components/calendar/time'
 import DropdownList from '../Components/calendar/DropdownList'
+import Icon from 'react-native-vector-icons/AntDesign'
+
+import { calendarStyles } from '../Styles/CalendarPageStyle'
 
 
 function CalendarScreen({ navigation }){
-
-  const [caretType, setCaretType] = useState(false)
-  const [yearCaret, setYearCaret] = useState(false)
-  const [monthCaret, setMonthCaret] = useState(false)
 
   const today = getFullCalendar(new Date())
   const week = ["일", "월", "화", "수", "목", "금", "토"]
   const [ selectedYear, setSelectedYear ] = useState(today.year)
   const [ selectedMonth, setSelectedMonth ] = useState(today.month)
+
+  const [caretType, setCaretType] = useState(false)
+  const [yearCaret, setYearCaret] = useState(false)
+  const [monthCaret, setMonthCaret] = useState(false)
 
   const N = 10
   const offset = today.year - N
@@ -70,92 +71,56 @@ function CalendarScreen({ navigation }){
       navigation.navigate('Home', { date: `${selectedYear}-${selectedMonth}-${selectedDate}`})
   }
   return (
-      <SafeAreaView style={styles.block} onTouchStart={handleOutSideOfMenu}>
+      <SafeAreaView style={calendarStyles.block} onTouchStart={handleOutSideOfMenu}>
           <StatusBar backgroundColor="#a8c8ffff"></StatusBar>
           {yearCaret && < DropdownList categories={yearsRange} top={-15} rate={2/3} selectCategory={selectCategory}/>}
           {monthCaret && <DropdownList categories={monthRange} top={-15} left={70} selectCategory={selectCategory}/>}
-          <View style={styles.calendarContainer}>
-              <View style={styles.calendarHeader} onTouchStart={(e) => e.stopPropagation()}>
-                  <Button title='◀︎' onPress={prevMonth}/>
-                  <Text style={styles.calendarHeaderText}>{selectedYear}년 {selectedMonth}월</Text>
-                  <Button title='▶︎' onPress={nextMonth}/>
+          <View style={calendarStyles.calendarContainer}>
+              <View style={calendarStyles.calendarHeader} onTouchStart={(e) => e.stopPropagation()}>
+                <Icon name="left" size={25} style={calendarStyles.moveMonthButton} onPress={prevMonth}/>
+                <Text style={calendarStyles.calendarHeaderText}>{selectedYear}년 {selectedMonth}월</Text>
+                <Icon name="right" size={25} style={calendarStyles.moveMonthButton} onPress={nextMonth}/>
               </View>
           
               <FlatList
-                  data={week}
-                  keyExtractor={item => item}
-                  renderItem={({item}) => (
-                      <View style={styles.day}>
-                          <Text>{item}</Text>
-                      </View>
-                  )}
-                  numColumns={7}
-                  horizontal={false}
+                data={week}
+                keyExtractor={item => item}
+                renderItem={({item}) => (
+                  <View style={[calendarStyles.day, calendarStyles.dayTitle]}>
+                    <Text>{item}</Text>
+                  </View>
+                )}
+                numColumns={7}
+                horizontal={false}
               />
               <FlatList
-                  data={days}
-                  keyExtractor={item => item}
-                  renderItem={({item}) => (
-                      <View style={[
-                              styles.day,
-                              (selectedYear === today.year && selectedMonth === today.month && item === today.date) 
-                              && styles.today
-                          ]}
-                          onTouchStart={(e) => {e.stopPropagation(); setDate(item)}}
-                      >
-                          <Text style={[
-                              styles.weekday,
-                              new Date(selectedYear, selectedMonth - 1, item).getDay() === 0 && styles.sunday,
-                              new Date(selectedYear, selectedMonth - 1, item).getDay() === 6 && styles.saturday
-                          ]}
-                          >
-                              {item}
-                          </Text>
-                      </View>
-                  )}
-                  numColumns={7}
-                  horizontal={false}
-                  contentContainerStyle={{ justifyContent: 'flex-start' }}
+                data={days}
+                keyExtractor={item => item}
+                renderItem={({item}) => (
+                  <View style={[
+                        calendarStyles.day,
+                        (selectedYear === today.year && selectedMonth === today.month && item === today.date) 
+                        && calendarStyles.today
+                    ]}
+                    onTouchStart={(e) => {e.stopPropagation(); setDate(item)}}
+                  >
+                    <Text style={[
+                        calendarStyles.weekday,
+                        new Date(selectedYear, selectedMonth - 1, item).getDay() === 0 && calendarStyles.sunday,
+                        new Date(selectedYear, selectedMonth - 1, item).getDay() === 6 && calendarStyles.saturday
+                      ]}
+                    >
+                      {item}
+                    </Text>
+                  </View>
+                )}
+                numColumns={7}
+                horizontal={false}
+                contentContainerStyle={{ justifyContent: 'flex-start' }}
               />
           </View>
       </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  block: {
-    flex: 1
-  },
-  calendarContainer: {
-    width: Dimensions.get('window').width * 0.9,
-    backgroundColor: '#777',
-    marginTop: 20,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-  calendarHeader: {
-      flexDirection: 'row'
-  },
-  calendarHeaderText: {
-    flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    backgroundColor: '#a8c8ff',
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  day: {
-    backgroundColor: '#fff',
-    margin: 0.2,
-    flex: 1,
-    alignItems: 'center',
-    padding: 3,
-  },
-  today: { backgroundColor: '#a8c9ff'},
-  weekday: { color: '#333' },
-  sunday: { color: '#de1738' },
-  saturday: { color: '#4169e1' },
-})
 
 export default CalendarScreen
