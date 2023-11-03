@@ -10,9 +10,9 @@ import Colors from "./src/Styles/Colors";
 
 const Tab = createBottomTabNavigator()
 
-function App(){
+export default function App(){
   return(
-    <NavigationContainer>
+    <>
       <Tab.Navigator
         initialRouteName = "Home"
         screenOptions={{tabBarActiveTintColor: Colors.black}}
@@ -30,7 +30,6 @@ function App(){
           tabBarIcon: ({color, size}) => <Icon name="settings" color={color} size={size}/>
         }}/>
       </Tab.Navigator>
-    </NavigationContainer>
+    </>
   )
 }
-export default App
