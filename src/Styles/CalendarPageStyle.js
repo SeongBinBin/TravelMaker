@@ -42,10 +42,9 @@ export const calendarStyles = StyleSheet.create({
     padding: 3,
     height: 40
   },
-  today: { backgroundColor: '#a8c9ff'},
+  today: { color: '#a8c9ff'},
   weekday: { color: '#333' },
-  sunday: { color: '#de1738' },
-  saturday: { color: '#4169e1' },
+  selectedDay: { backgroundColor: '#a8c9ff'},
   moveMonthButton: {
     color: Colors.black,
     backgroundColor: 'rgb(242, 242, 242)',

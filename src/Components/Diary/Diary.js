@@ -1,20 +1,42 @@
 import React from "react";
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, FlatList } from 'react-native'
 
 import Icon from 'react-native-vector-icons/AntDesign'
 
 import { diaryStyles } from "../../Styles/DiaryStyle";
+import { diaryData } from "./DiaryData";
 
-function Diary({ modalOpen, setModalOpen }){
+function Diary({ 
+  modalOpen, setModalOpen, 
+  setTitle, setContents, 
+  selectedYear, selectedMonth, selectedDate
+}){
+
+  console.log( `${selectedYear}-${selectedMonth}-${selectedDate}` )
 
   return (
     <View style={diaryStyles.diaryContainer}>
-      <Pressable style={diaryStyles.diaryItem}>
-        <Text style={diaryStyles.diaryItemText}>테스트를 위한 글</Text>
-      </Pressable>
-      <Pressable style={diaryStyles.diaryItem}>
-        <Text style={diaryStyles.diaryItemText}>테스트를 위한 글</Text>
-      </Pressable>
+
+      <FlatList
+        data={diaryData}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          item.date === `${selectedYear}-${selectedMonth}-${selectedDate}` &&
+          (
+            <Pressable 
+              style={diaryStyles.diaryItem}
+              onPress={() => {
+                setTitle(item.title)
+                setContents(item.contents)
+                setModalOpen(true)
+              }}
+            >
+              <Text style={diaryStyles.diaryItemText}>{item.title}</Text>
+            </Pressable>
+          )
+          
+        )}
+      />
 
       <Pressable 
         style={{ position: 'absolute', bottom: 10, right: 10}}

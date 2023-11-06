@@ -14,7 +14,14 @@ import Icon from 'react-native-vector-icons/AntDesign'
 
 import { calendarStyles } from '../../Styles/CalendarPageStyle'
 
-function Calendar({ today, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, setSelectedDate, setCurrentPage, modalOpen, setModalOpen }){
+function Calendar({ 
+  today, 
+  selectedYear, setSelectedYear, 
+  selectedMonth, setSelectedMonth, 
+  selectedDate,  setSelectedDate, 
+  modalOpen, setModalOpen,
+  setTitle, setContents
+}){
 
   const week = ["일", "월", "화", "수", "목", "금", "토"]
 
@@ -66,6 +73,7 @@ function Calendar({ today, selectedYear, setSelectedYear, selectedMonth, setSele
   }
   const setDate = (selectedDate) => {
       setSelectedDate(selectedDate)
+      console.log(selectedDate)
   }
 
   return (
@@ -95,18 +103,14 @@ function Calendar({ today, selectedYear, setSelectedYear, selectedMonth, setSele
             data={days}
             keyExtractor={item => item}
             renderItem={({item}) => (
-              <View style={[
-                    calendarStyles.day,
-                    (selectedYear === today.year && selectedMonth === today.month && item === today.date) 
-                    && calendarStyles.today
-                ]}
+              <View style={calendarStyles.day}
                 onTouchStart={(e) => {e.stopPropagation(); setDate(item)}}
               >
                 <Text style={[
-                    calendarStyles.weekday,
-                    new Date(selectedYear, selectedMonth - 1, item).getDay() === 0 && calendarStyles.sunday,
-                    new Date(selectedYear, selectedMonth - 1, item).getDay() === 6 && calendarStyles.saturday
-                  ]}
+                  calendarStyles.weekday,
+                  (selectedYear === today.year && selectedMonth === today.month && item === today.date) 
+                  && calendarStyles.today
+                ]}
                 >
                   {item}
                 </Text>
@@ -120,6 +124,11 @@ function Calendar({ today, selectedYear, setSelectedYear, selectedMonth, setSele
         <Diary
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
+          setTitle={setTitle}
+          setContents={setContents}
+          selectedYear={selectedYear}
+          selectedMonth={selectedMonth}
+          selectedDate={selectedDate}
         />
       </SafeAreaView>
   )

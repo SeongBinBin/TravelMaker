@@ -12,9 +12,12 @@ function CalendarScreen(){
   
   const [ selectedYear, setSelectedYear ] = useState(today.year)
   const [ selectedMonth, setSelectedMonth ] = useState(today.month)
-  const [ selectedDate, setSeltedDate ] = useState(today.date)
+  const [ selectedDate, setSelectedDate ] = useState(today.date)
 
   const [ modalOpen, setModalOpen ] = useState(false)
+
+  const [ title, setTitle ] = useState('')
+  const [ contents, setContents ] = useState('')
 
   return (
     <>
@@ -24,9 +27,12 @@ function CalendarScreen(){
         setSelectedYear={setSelectedYear}
         selectedMonth={selectedMonth}
         setSelectedMonth={setSelectedMonth}
-        setSeltedDate={setSeltedDate}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
+        setTitle={setTitle}
+        setContents={setContents}
       />
       <Modal
         visible={modalOpen}
@@ -37,6 +43,10 @@ function CalendarScreen(){
           selectedYear={selectedYear}
           selectedMonth={selectedMonth}
           selectedDate={selectedDate}
+          title={title}
+          setTitle={setTitle}
+          contents={contents}
+          setContents={setContents}
         />
       </Modal>
       

@@ -6,6 +6,7 @@ import Colors from "./Colors";
 export const noteStyles = StyleSheet.create({
   block: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   noteContainer: {
     width: Dimensions.get('window').width * 0.9,
@@ -31,12 +32,24 @@ export const noteStyles = StyleSheet.create({
     right: 0
   },
   textContainer: {
-    width: '100%'
+    width: '100%',
+  },
+  titleContainer: {
+    borderBottomWidth: 1,
+    marginBottom: 20,
   },
   title: {
-
+    fontSize: 22,
+    fontWeight: 'normal',    
   },
   contents: {
-
+    fontSize: 18,
+    flexShrink: 1,
+  },
+  submit: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 50
   }
 })
