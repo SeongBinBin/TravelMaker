@@ -10,7 +10,8 @@ function Note({
   selectedDate, 
   setModalOpen,
   title, setTitle,
-  contents, setContents
+  contents, setContents,
+  insertRecord
  }){
 
   const hideKeyboard = () => {
@@ -61,7 +62,7 @@ function Note({
           </View>
 
           <View style={noteStyles.submit}>
-            <TouchableWithoutFeedback onPress={() => setModalOpen(false)}>
+            <TouchableWithoutFeedback onPress={insertRecord}>
               <Text style={{ fontSize: 18 }}>저장하기</Text>
             </TouchableWithoutFeedback>
           </View>

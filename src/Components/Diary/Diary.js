@@ -1,27 +1,29 @@
 import React from "react";
 import { View, Text, Pressable, FlatList } from 'react-native'
+import moment from 'moment'
 
 import Icon from 'react-native-vector-icons/AntDesign'
 
 import { diaryStyles } from "../../Styles/DiaryStyle";
-import { diaryData } from "./DiaryData";
 
-function Diary({ 
+function Diary({
+  records,
   modalOpen, setModalOpen, 
   setTitle, setContents, 
-  selectedYear, selectedMonth, selectedDate
+  selectedYear, selectedMonth, selectedDate,
+  setIsEdit,
+  setSelectedId
 }){
-
-  console.log( `${selectedYear}-${selectedMonth}-${selectedDate}` )
 
   return (
     <View style={diaryStyles.diaryContainer}>
 
       <FlatList
-        data={diaryData}
+        data={records}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          item.date === `${selectedYear}-${selectedMonth}-${selectedDate}` &&
+          item.createdAt !== null &&
+          moment(item.createdAt.toDate()).format('YYYY-MM-DD') === `${selectedYear}-${selectedMonth}-${selectedDate}` &&
           (
             <Pressable 
               style={diaryStyles.diaryItem}
@@ -29,6 +31,8 @@ function Diary({
                 setTitle(item.title)
                 setContents(item.contents)
                 setModalOpen(true)
+                setIsEdit(true)
+                setSelectedId(item.id)
               }}
             >
               <Text style={diaryStyles.diaryItemText}>{item.title}</Text>

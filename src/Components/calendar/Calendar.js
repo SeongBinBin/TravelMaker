@@ -15,12 +15,14 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { calendarStyles } from '../../Styles/CalendarPageStyle'
 
 function Calendar({ 
-  today, 
+  today, records,
   selectedYear, setSelectedYear, 
   selectedMonth, setSelectedMonth, 
   selectedDate,  setSelectedDate, 
   modalOpen, setModalOpen,
-  setTitle, setContents
+  setTitle, setContents,
+  setIsEdit, isEdit,
+  setSelectedId
 }){
 
   const week = ["일", "월", "화", "수", "목", "금", "토"]
@@ -72,8 +74,12 @@ function Calendar({
       closeDropdown()
   }
   const setDate = (selectedDate) => {
-      setSelectedDate(selectedDate)
-      console.log(selectedDate)
+
+    if(Number(selectedDate) < 10){
+      return setSelectedDate(`0${selectedDate}`)
+    }
+
+    setSelectedDate(selectedDate)
   }
 
   return (
@@ -129,6 +135,10 @@ function Calendar({
           selectedYear={selectedYear}
           selectedMonth={selectedMonth}
           selectedDate={selectedDate}
+          records={records}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          setSelectedId={setSelectedId}
         />
       </SafeAreaView>
   )
