@@ -47,7 +47,10 @@ export const noteStyles = StyleSheet.create({
     flexShrink: 1,
   },
   submit: {
-    width: '100%',
+    width: 100, height: 50,
+    marginLeft: 'auto', marginRight: 'auto',
+    borderRadius: 10,
+    backgroundColor: '#a8c9ff',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 50

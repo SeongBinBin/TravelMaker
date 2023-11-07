@@ -1,9 +1,9 @@
-import React from "react";
-import { View, Text, Pressable, FlatList } from 'react-native'
+import React, { useState } from "react";
+import { View, Text, Pressable, FlatList, Modal } from 'react-native'
 import moment from 'moment'
+import { removeData } from "../../apis/firebase";
 
 import Icon from 'react-native-vector-icons/AntDesign'
-
 import { diaryStyles } from "../../Styles/DiaryStyle";
 
 function Diary({
@@ -12,7 +12,8 @@ function Diary({
   setTitle, setContents, 
   selectedYear, selectedMonth, selectedDate,
   setIsEdit,
-  setSelectedId
+  setSelectedId,
+  setDeleteModal
 }){
 
   return (
@@ -32,9 +33,13 @@ function Diary({
                 setContents(item.contents)
                 setModalOpen(true)
                 setIsEdit(true)
+              }}
+              onLongPress={() => {
+                setDeleteModal(true)
                 setSelectedId(item.id)
               }}
             >
+              {/* () => removeData('Records', item.id) */}
               <Text style={diaryStyles.diaryItemText}>{item.title}</Text>
             </Pressable>
           )
@@ -46,7 +51,7 @@ function Diary({
         style={{ position: 'absolute', bottom: 10, right: 10}}
         onPress={() => setModalOpen(true)}
       >
-        <Icon name="pluscircle" size={50} color={'#333'}/>
+        <Icon name="pluscircle" size={50} color={'#a8c9ff'}/>
       </Pressable>
     </View>
   )

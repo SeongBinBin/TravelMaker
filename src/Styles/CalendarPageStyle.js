@@ -48,5 +48,59 @@ export const calendarStyles = StyleSheet.create({
   moveMonthButton: {
     color: Colors.black,
     backgroundColor: 'rgb(242, 242, 242)',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  deleteModalContainer: {
+    margin: 50,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  alignHorizontal: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  guideText: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  button: {
+    width: 70,
+    height: 40,
+    borderRadius: 10,
+    padding: 0,
+    marginTop: 30,
+    marginRight: 5,
+    justifyContent: 'center',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  buttonOpen: {
+    backgroundColor: '#FA3447',
+  },
+  buttonClose: {
+    backgroundColor: '#ced4da',
+  },
+  dot: {
+    fontSize: 8,
+    position: 'absolute',
+    bottom: 2
   }
 })

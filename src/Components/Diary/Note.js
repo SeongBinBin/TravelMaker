@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 
 import Icon from 'react-native-vector-icons/AntDesign'
 import { noteStyles } from "../../Styles/NoteStyle";
@@ -62,9 +62,9 @@ function Note({
           </View>
 
           <View style={noteStyles.submit}>
-            <TouchableWithoutFeedback onPress={insertRecord}>
-              <Text style={{ fontSize: 18 }}>저장하기</Text>
-            </TouchableWithoutFeedback>
+            <TouchableOpacity onPress={insertRecord}>
+              <Text style={{ fontSize: 18, color: 'white' }}>저장하기</Text>
+            </TouchableOpacity>
           </View>
 
         </View>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Modal } from 'react-native'
+import { Modal, View, Text, Pressable } from 'react-native'
 
 import { getFullCalendar } from '../Components/Calendar/time'
 import { addData, removeData, getCurrentTime, updateData } from '../apis/firebase'
 
 import Calendar from '../Components/Calendar/Calendar'
 import Note from '../Components/Diary/Note'
+import { calendarStyles } from '../Styles/CalendarPageStyle'
 
 function CalendarScreen({ records }){
 
@@ -15,7 +16,10 @@ function CalendarScreen({ records }){
   const [ selectedMonth, setSelectedMonth ] = useState(today.month)
   const [ selectedDate, setSelectedDate ] = useState(today.date)
 
+  const [ isToday, setIsToday ] = useState(true)
+
   const [ modalOpen, setModalOpen ] = useState(false)
+  const [ deleteModal, setDeleteModal ] = useState(false)
 
   const [ isEdit, setIsEdit ] = useState(false)
   const [ title, setTitle ] = useState('')
@@ -42,7 +46,7 @@ function CalendarScreen({ records }){
     const newRecord = {
       title,
       contents,
-      createdAt: getCurrentTime(),
+      createdAt: isToday? getCurrentTime() : new Date(selectedYear, selectedMonth - 1, selectedDate),
     }
 
     await addData('Records', newRecord)
@@ -58,6 +62,11 @@ function CalendarScreen({ records }){
     }
   }, [])
 
+  const removeRecord = () => {
+    removeData('Records', selectedId)
+    setDeleteModal(false)
+  }
+
   return (
     <>
       <Calendar
@@ -68,6 +77,7 @@ function CalendarScreen({ records }){
         setSelectedMonth={setSelectedMonth}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
+
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         setTitle={setTitle}
@@ -75,7 +85,10 @@ function CalendarScreen({ records }){
         records={records}
         isEdit={isEdit}
         setIsEdit={setIsEdit}
+
         setSelectedId={setSelectedId}
+        setDeleteModal={setDeleteModal}
+        setIsToday={setIsToday}
       />
       <Modal
         visible={modalOpen}
@@ -94,6 +107,31 @@ function CalendarScreen({ records }){
         />
       </Modal>
       
+      <Modal
+        visible={deleteModal}
+        transparent={true}
+      >
+        <View style={calendarStyles.centeredView}>
+          <View style={calendarStyles.deleteModalContainer}>
+            <Text style={calendarStyles.guideText}>글을 제거하시겠습니까?</Text>
+            <View style={calendarStyles.alignHorizontal}>
+              <Pressable 
+                style={[calendarStyles.button, calendarStyles.buttonClose]}
+                onPress={() => setDeleteModal(false)}
+              >
+                <Text style={calendarStyles.textStyle}>취소</Text>
+              </Pressable>
+              <Pressable 
+                style={[calendarStyles.button, calendarStyles.buttonOpen]}
+                onPress={removeRecord}
+              >
+                <Text style={calendarStyles.textStyle}>삭제</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+        
+      </Modal>
     </>
   )
 }

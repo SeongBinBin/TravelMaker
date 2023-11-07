@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { 
     SafeAreaView, 
     View, Text,
@@ -6,6 +6,8 @@ import {
     FlatList,
     TouchableWithoutFeedback
 } from 'react-native'
+
+import moment from 'moment'
 
 import { getFullCalendar } from './time'
 import DropdownList from './DropdownList'
@@ -22,7 +24,8 @@ function Calendar({
   modalOpen, setModalOpen,
   setTitle, setContents,
   setIsEdit, isEdit,
-  setSelectedId
+  setSelectedId, setDeleteModal,
+  setIsToday
 }){
 
   const week = ["일", "월", "화", "수", "목", "금", "토"]
@@ -30,6 +33,8 @@ function Calendar({
   const [caretType, setCaretType] = useState(false)
   const [yearCaret, setYearCaret] = useState(false)
   const [monthCaret, setMonthCaret] = useState(false)
+
+  const [ createdAt, setCreatedAt ] = useState([])
 
   const N = 10
   const offset = today.year - N
@@ -40,6 +45,16 @@ function Calendar({
   const lastDay = new Date(selectedYear, selectedMonth - 1, daysOfMonth).getDay()
   const days = [ ...Array(day).fill(""), ...Array(daysOfMonth).fill(0).map((_, id) => id + 1),
           ...Array(week.length-(lastDay + 1)).fill("")]
+
+
+  useEffect(() => {
+    const date = records.map((record) => {
+      return moment(record.createdAt.toDate()).format('YYYY-MM-DD')
+    })
+
+    setCreatedAt([...date])
+
+  }, [])
 
   const prevMonth = useCallback(() => {
       if(selectedMonth === 1){
@@ -75,6 +90,12 @@ function Calendar({
   }
   const setDate = (selectedDate) => {
 
+    if(selectedDate === today.date){
+      setIsToday(true)
+    }else{
+      setIsToday(false)
+    }
+
     if(Number(selectedDate) < 10){
       return setSelectedDate(`0${selectedDate}`)
     }
@@ -109,16 +130,28 @@ function Calendar({
             data={days}
             keyExtractor={item => item}
             renderItem={({item}) => (
-              <View style={calendarStyles.day}
+
+              <View style={[
+                calendarStyles.day, 
+                item !== "" && (selectedDate === item || selectedDate === `0${item}`)?
+                calendarStyles.selectedDay : '' 
+              ]}
                 onTouchStart={(e) => {e.stopPropagation(); setDate(item)}}
               >
                 <Text style={[
                   calendarStyles.weekday,
                   (selectedYear === today.year && selectedMonth === today.month && item === today.date) 
-                  && calendarStyles.today
+                  && calendarStyles.today,
+                  selectedDate === item || selectedDate === `0${item}`?
+                  { color: 'white' } : '' 
                 ]}
                 >
                   {item}
+                </Text>
+                <Text style={[calendarStyles.dot, {color: selectedDate === item || selectedDate === `0${item}` ? 'white' : '#a8c9ff' }]}>
+                  {createdAt.includes(`${selectedYear}-${selectedMonth}-${item}`) || createdAt.includes(`${selectedYear}-${selectedMonth}-0${item}`) ?
+                    '●' : ''
+                  }
                 </Text>
               </View>
             )}
@@ -139,6 +172,7 @@ function Calendar({
           isEdit={isEdit}
           setIsEdit={setIsEdit}
           setSelectedId={setSelectedId}
+          setDeleteModal={setDeleteModal}
         />
       </SafeAreaView>
   )
