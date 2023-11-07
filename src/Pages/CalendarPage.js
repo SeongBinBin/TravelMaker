@@ -8,7 +8,7 @@ import Calendar from '../Components/Calendar/Calendar'
 import Note from '../Components/Diary/Note'
 import { calendarStyles } from '../Styles/CalendarPageStyle'
 
-function CalendarScreen({ records }){
+function CalendarScreen({ records, createdAt }){
 
   const today = getFullCalendar(new Date())
   
@@ -89,6 +89,7 @@ function CalendarScreen({ records }){
         setSelectedId={setSelectedId}
         setDeleteModal={setDeleteModal}
         setIsToday={setIsToday}
+        createdAt={createdAt}
       />
       <Modal
         visible={modalOpen}

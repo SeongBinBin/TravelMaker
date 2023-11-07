@@ -11,6 +11,7 @@ import SettingPage from "./src/Pages/SettingPage";
 import Colors from "./src/Styles/Colors";
 
 import { getCollection } from "./src/apis/firebase";
+import moment from "moment";
 
 const Tab = createBottomTabNavigator()
 
@@ -18,19 +19,27 @@ function App(){
 
   const [ records, setRecords ] = useState([])
   const [ loading, setLoading ] = useState(true)
+  const [ createdAt, setCreatedAt ] = useState([])
 
   useEffect(() => {
     function onResult(querySnapshot){
       const list = []
+      const date = []
       querySnapshot.forEach(doc => {
         list.push({
           ...doc.data(),
           id: doc.id,
         })
+        list.forEach((data) => {
+          if(data.createdAt !== null){
+            date.push(moment(data.createdAt.toDate()).format('YYYY-MM-DD'))
+          }
+        })
       })
 
       setRecords(list)
       setLoading(false)
+      setCreatedAt(date)
     }
 
     function onError(error){
@@ -66,7 +75,7 @@ function App(){
           tabBarIcon: ({color, size}) => <Icon name="home" color={color} size={size}/>
         }}/>
         <Tab.Screen name="Calendar" children={(props) => 
-          <CalendarPage {...props} records={records}/>
+          <CalendarPage {...props} records={records} createdAt={createdAt}/>
           }
           options={{
             title: '캘린더',

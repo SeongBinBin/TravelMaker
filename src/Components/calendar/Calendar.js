@@ -25,7 +25,7 @@ function Calendar({
   setTitle, setContents,
   setIsEdit, isEdit,
   setSelectedId, setDeleteModal,
-  setIsToday
+  setIsToday, createdAt
 }){
 
   const week = ["일", "월", "화", "수", "목", "금", "토"]
@@ -33,8 +33,6 @@ function Calendar({
   const [caretType, setCaretType] = useState(false)
   const [yearCaret, setYearCaret] = useState(false)
   const [monthCaret, setMonthCaret] = useState(false)
-
-  const [ createdAt, setCreatedAt ] = useState([])
 
   const N = 10
   const offset = today.year - N
@@ -45,16 +43,6 @@ function Calendar({
   const lastDay = new Date(selectedYear, selectedMonth - 1, daysOfMonth).getDay()
   const days = [ ...Array(day).fill(""), ...Array(daysOfMonth).fill(0).map((_, id) => id + 1),
           ...Array(week.length-(lastDay + 1)).fill("")]
-
-
-  useEffect(() => {
-    const date = records.map((record) => {
-      return moment(record.createdAt.toDate()).format('YYYY-MM-DD')
-    })
-
-    setCreatedAt([...date])
-
-  }, [])
 
   const prevMonth = useCallback(() => {
       if(selectedMonth === 1){
