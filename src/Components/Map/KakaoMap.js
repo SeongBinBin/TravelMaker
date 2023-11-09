@@ -48,8 +48,8 @@ function KakaoMap({ route }) {
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-            // source={{ uri: 'https://seongbinbin.github.io/#/nativemap' }}
-            source={{ uri: 'http://192.168.200.14:3000/#/nativemap' }}
+            source={{ uri: 'https://seongbinbin.github.io/#/nativemap' }}
+            // source={{ uri: 'http://192.168.200.14:3000/#/nativemap' }}
             onLoad={() => sendMessage()}
         />
     )
