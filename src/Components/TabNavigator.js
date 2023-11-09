@@ -11,69 +11,23 @@ import SettingPage from "../Pages/SettingPage";
 import Colors from "../Styles/Colors";
 import MapPage from "../Pages/MapPage";
 
-import { getCollection } from "../apis/firebase"
-import moment from "moment";
+
 
 const Tab = createBottomTabNavigator()
-const Stack = createNativeStackNavigator()
 
-function TabNavigator({navigation}){
-
-  const [ records, setRecords ] = useState([])
-  const [ loading, setLoading ] = useState(true)
-  const [ createdAt, setCreatedAt ] = useState([])
-
-  useEffect(() => {
-    function onResult(querySnapshot){
-      const list = []
-      const date = []
-      querySnapshot.forEach(doc => {
-        list.push({
-          ...doc.data(),
-          id: doc.id,
-        })
-        list.forEach((data) => {
-          if(data.createdAt !== null){
-            date.push(moment(data.createdAt.toDate()).format('YYYY-MM-DD'))
-          }
-        })
-      })
-
-      setRecords(list)
-      setLoading(false)
-      setCreatedAt(date)
-    }
-
-    function onError(error){
-      console.error(`${error} occured when reading records`)
-    }
-
-    return getCollection('Records',
-                          onResult, onError,
-                          null,
-                          {exists: true, condition: ['createdAt', 'asc']},
-                          null
-                        )
-
-  }, [])
-
-  if(loading){
-    return (
-        <View style={styles.block}>
-          <ActivityIndicator size="large" color="#0047ab"/>
-          <Text style={styles.loadingText}>loading...</Text>
-        </View>
-    )
-  }
+function TabNavigator({ navigation, records, createdAt }){
 
   return(
       <Tab.Navigator
         initialRouteName = "Home"
         screenOptions={{tabBarActiveTintColor: Colors.black}}
       >
-        <Tab.Screen name="Home" component={MainPage} options={{
-          title: '홈',
-          tabBarIcon: ({color, size}) => <Icon name="home" color={color} size={size}/>
+        <Tab.Screen name="Home" children={(props) => 
+          <MainPage {...props} records={records} createdAt={createdAt}/>
+          } 
+          options={{
+            title: '홈',
+            tabBarIcon: ({color, size}) => <Icon name="home" color={color} size={size}/>
         }}/>
         <Tab.Screen name="Calendar" children={(props) => 
           <CalendarPage {...props} records={records} createdAt={createdAt}/>

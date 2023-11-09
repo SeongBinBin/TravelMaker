@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from 'react-native'
 
-import KakaoMap from '../Components/KakaoMap'
+import KakaoMap from '../Components/Map/KakaoMap'
 
 function MapPage(){
     return(

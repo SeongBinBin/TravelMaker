@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, View, Text, StyleSheet, StatusBar } from 'react-native'
 
-import KoreaMap from '../Components/KoreaMap'
+import KoreaMap from '../Components/Map/KoreaMap'
 
 function MainPage(){
   return (
