@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
 import { WebView } from 'react-native-webview';
 
-import Region from '../Assets/Json/Region.json';
-import Colors from "../Styles/Colors";
+import Region from '../../Assets/Json/Region.json';
+import Colors from "../../Styles/Colors";
 
 function KoreaMap() {
     const navigation = useNavigation();
