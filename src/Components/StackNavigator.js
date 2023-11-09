@@ -2,9 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import KakaoMap from './KakaoMap';
+import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
-import KoreaMap from './KoreaMap';
+import KoreaMap from './Map/KoreaMap';
+import TravelRecord from './TravelRecord';
 
 const Stack = createNativeStackNavigator()
 
@@ -15,6 +16,7 @@ function StackNavigator({navigation}){
         <Stack.Screen name="Main" component={TabNavigator} options={{headerShown: false}}/>
         <Stack.Screen name="Map" component={KakaoMap} options={{headerShown: false}}/>
         <Stack.Screen name="KoreaMap" component={KoreaMap} options={{headerShown: false}}/>
+        <Stack.Screen name="TravelRecord" component={TravelRecord} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
