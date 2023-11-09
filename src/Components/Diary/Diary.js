@@ -16,6 +16,8 @@ function Diary({
   setDeleteModal
 }){
 
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000
+
   return (
     <View style={diaryStyles.diaryContainer}>
 
@@ -49,7 +51,7 @@ function Diary({
 
       <Pressable 
         style={{ position: 'absolute', bottom: 10, right: 10}}
-        onPress={() => setModalOpen(true)}
+        onPress={() => {setModalOpen(true); setIsEdit(false);}}
       >
         <Icon name="pluscircle" size={50} color={'#a8c9ff'}/>
       </Pressable>

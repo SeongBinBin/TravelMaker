@@ -94,7 +94,7 @@ function Calendar({
   return (
       <SafeAreaView style={calendarStyles.block} onTouchStart={handleOutSideOfMenu}>
         <StatusBar backgroundColor="#a8c8ffff"></StatusBar>
-        {yearCaret && < DropdownList categories={yearsRange} top={-15} rate={2/3} selectCategory={selectCategory}/>}
+        {yearCaret && <DropdownList categories={yearsRange} top={-15} rate={2/3} selectCategory={selectCategory}/>}
         {monthCaret && <DropdownList categories={monthRange} top={-15} left={70} selectCategory={selectCategory}/>}
         <View style={calendarStyles.calendarContainer}>
           <View style={calendarStyles.calendarHeader} onTouchStart={(e) => e.stopPropagation()}>

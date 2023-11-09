@@ -42,11 +42,14 @@ function CalendarScreen({ records, createdAt }){
 
       return;
     }
+    const now = new Date() // 서버 시간 기준 현재 로컬 시간
+    const GMTNow = now.getTime() + now.getTimezoneOffset() * 60 * 1000
+    const KR_TIME_DIFF = 9 * 60 * 60 * 1000
 
     const newRecord = {
       title,
       contents,
-      createdAt: isToday? getCurrentTime() : new Date(selectedYear, selectedMonth - 1, selectedDate),
+      createdAt: isToday? new Date( GMTNow + KR_TIME_DIFF ) : new Date(selectedYear, selectedMonth - 1, selectedDate, -9),
     }
 
     await addData('Records', newRecord)
@@ -60,6 +63,8 @@ function CalendarScreen({ records, createdAt }){
     if(today.date < 10){
       setSelectedDate(`0${today.date}`)
     }
+
+    console.log(getCurrentTime())
   }, [])
 
   const removeRecord = () => {
