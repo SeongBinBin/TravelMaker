@@ -52,8 +52,8 @@ function KakaoMap({ route }) {
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-            // source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
-            source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
+              // source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
+              source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
             onLoad={() => sendMessage()}
         />
     )

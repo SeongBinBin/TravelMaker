@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
@@ -65,7 +65,7 @@ function StackNavigator({ navigation }){
         </View>
     )
   }
-  
+
   return(
     <NavigationContainer>
       <Stack.Navigator initialRouteName = "Landing">
@@ -83,4 +83,22 @@ function StackNavigator({ navigation }){
     </NavigationContainer>
   )
 }
+
+const styles = StyleSheet.create({
+  block: {
+    flex: 1,
+    backgroundColor: '#a8c8ff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 10,
+    textAlign: 'center',
+  }
+})
+
+
 export default StackNavigator
