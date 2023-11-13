@@ -3,18 +3,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 
-
 import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
 import KoreaMap from './Map/KoreaMap';
-import CalendarScreen from "../Pages/CalendarPage";
 
 import { getCollection } from "../apis/firebase"
 import moment from "moment";
 
 const Stack = createNativeStackNavigator()
 
-function StackNavigator({ navigation }){
+function StackNavigator(){
 
   const [ records, setRecords ] = useState([])
   const [ loading, setLoading ] = useState(true)
@@ -65,7 +63,7 @@ function StackNavigator({ navigation }){
 
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName = "Main">
+      <Stack.Navigator initialRouteName = "Main" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Main"
           children={(props) => 
             <TabNavigator {...props} records={records} createdAt={createdAt}/>

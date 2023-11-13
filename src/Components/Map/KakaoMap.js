@@ -37,10 +37,14 @@ function KakaoMap({ route }) {
 
         // console.log('위도 : ' + data.Ma + ' / ' + '경도 : ' + data.La)
         navigation.navigate('Calendar', {
-            latitude: receiveLatitude.current,
-            longitude: receiveLongitude.current,
-            cityValue: receiveCityValue.current,
-            regionValue: receiveRegionValue.current,
+            screen: 'Calendar',
+            params: {
+                latitude: receiveLatitude.current,
+                longitude: receiveLongitude.current,
+                cityValue: receiveCityValue.current,
+                regionValue: receiveRegionValue.current,
+            },
+
         })
     }
 

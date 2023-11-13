@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import MainPage from "../Pages/MainPage";
@@ -20,7 +18,7 @@ function TabNavigator({ navigation, records, createdAt }){
   return(
       <Tab.Navigator
         initialRouteName = "Home"
-        screenOptions={{tabBarActiveTintColor: Colors.black}}
+        screenOptions={{tabBarActiveTintColor: Colors.black, headerShown: false}}
       >
         <Tab.Screen name="Home" children={(props) => 
           <MainPage {...props} records={records} createdAt={createdAt}/>

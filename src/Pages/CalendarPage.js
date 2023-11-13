@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Modal, View, Text, Pressable } from 'react-native'
+import { Modal, View, Text, Pressable, SafeAreaView, StatusBar } from 'react-native'
 
 import { getFullCalendar } from '../Components/Calendar/time'
-import { addData, removeData, getCurrentTime, updateData } from '../apis/firebase'
+import { addData, removeData, updateData } from '../apis/firebase'
 
 import Calendar from '../Components/Calendar/Calendar'
+import Diary from '../Components/Diary/Diary'
 import Note from '../Components/Diary/Note'
 import { calendarStyles } from '../Styles/CalendarPageStyle'
 
-function CalendarScreen({ records, createdAt }){
+
+function CalendarScreen({ records, createdAt, route, navigation }){
 
   const today = getFullCalendar(new Date())
   
@@ -22,26 +24,38 @@ function CalendarScreen({ records, createdAt }){
   const [ deleteModal, setDeleteModal ] = useState(false)
 
   const [ isEdit, setIsEdit ] = useState(false)
+  const [ isEditPlace, setIsEditPlace ] = useState(false)
   const [ title, setTitle ] = useState('')
   const [ contents, setContents ] = useState('')
   const [ selectedId, setSelectedId ] = useState('')
 
+  const [ latitude, setLatitude ] = useState('')
+  const [ longitude, setLongitude ] = useState('')
+  const [ cityValue, setCityValue ] = useState('')
+  const [ regionValue, setRegionValue ] = useState('')
+
+  useEffect(() => {
+    if(today.date < 10){
+      setSelectedDate(`0${today.date}`)
+    }
+
+  }, [])
+
+  useEffect(() => {
+
+    if(route.params !== undefined){
+      setLatitude(route.params.latitude)
+      setLongitude(route.params.longitude)
+      setCityValue(route.params.cityValue)
+      setRegionValue(route.params.regionValue)
+    }
+
+  }, [route])
+
   const insertRecord = async () => {
 
-    if(isEdit){
-      await updateData('Records', selectedId, {
-        title,
-        contents,
-      })
-      .catch(error => console.error(error))
+    await editData();
 
-      setTitle('')
-      setContents('')
-      setModalOpen(false)
-      setIsEdit(false)
-
-      return;
-    }
     const now = new Date() // 서버 시간 기준 현재 로컬 시간
     const GMTNow = now.getTime() + now.getTimezoneOffset() * 60 * 1000
     const KR_TIME_DIFF = 9 * 60 * 60 * 1000
@@ -59,20 +73,54 @@ function CalendarScreen({ records, createdAt }){
     setModalOpen(false)
   }
 
-  useEffect(() => {
-    if(today.date < 10){
-      setSelectedDate(`0${today.date}`)
+  const  editData = async () => {
+
+    if(isEdit && isEditPlace){
+      await updateData('Records', selectedId, {
+        latitude,
+        longitude,
+        cityValue,
+        regionValue,
+      })
+      .catch(error => console.error(error))
+
+      setLatitude('')
+      setLongitude('')
+      setCityValue('')
+      setRegionValue('')
+      setIsEditPlace(false)
     }
 
-  }, [])
+    if(isEdit){
+      await updateData('Records', selectedId, {
+        title,
+        contents,
+      })
+      .catch(error => console.error(error))
+
+      setTitle('')
+      setContents('')
+      setModalOpen(false)
+      setIsEdit(false)
+
+      return;
+    }
+  }
 
   const removeRecord = () => {
     removeData('Records', selectedId)
     setDeleteModal(false)
   }
 
+  const moveToMap = () => {
+    navigation.navigate('Main', {
+      screen: 'Home'
+    })
+  }
+
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar backgroundColor="#a8c8ffff"></StatusBar>
       <Calendar
         today={today}
         selectedYear={selectedYear}
@@ -95,6 +143,22 @@ function CalendarScreen({ records, createdAt }){
         setIsToday={setIsToday}
         createdAt={createdAt}
       />
+
+      <Diary
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        setTitle={setTitle}
+        setContents={setContents}
+        selectedYear={selectedYear}
+        selectedMonth={selectedMonth}
+        selectedDate={selectedDate}
+        records={records}
+        isEdit={isEdit}
+        setIsEdit={setIsEdit}
+        setSelectedId={setSelectedId}
+        setDeleteModal={setDeleteModal}
+      />
+
       <Modal
         visible={modalOpen}
         animationType="slide"
@@ -109,6 +173,7 @@ function CalendarScreen({ records, createdAt }){
           contents={contents}
           setContents={setContents}
           insertRecord={insertRecord}
+          moveToMap={moveToMap}
         />
       </Modal>
       
@@ -137,7 +202,7 @@ function CalendarScreen({ records, createdAt }){
         </View>
         
       </Modal>
-    </>
+    </SafeAreaView>
   )
 }
 

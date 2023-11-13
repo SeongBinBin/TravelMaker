@@ -18,7 +18,8 @@ function Note({
   setModalOpen,
   title, setTitle,
   contents, setContents,
-  insertRecord
+  insertRecord,
+  moveToMap
  }){
 
   const hideKeyboard = () => {
@@ -71,7 +72,7 @@ function Note({
           
           <View style={{ width: Dimensions.get('window').width * 0.9, marginLeft: 'auto', marginRight: 'auto' }}>
             <View style={noteStyles.addPlace}>
-              <TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={moveToMap}>
                 <Image
                   source={addPlace}
                   style={noteStyles.addPlaceImage}
@@ -91,8 +92,6 @@ function Note({
               </TouchableOpacity>
             </View>
           </View>
-
-          
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
