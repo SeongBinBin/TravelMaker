@@ -3,10 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 
-
 import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
 import KoreaMap from './Map/KoreaMap';
+import TravelRecord from "./TravelRecord";
+import Calendar from "./Calendar/Calendar";
+import LoginPage from "../Pages/LoginPage";
+import LandingPage from "../Pages/LandingPage";
+import MapTabStack from "./MapTabStack";
 
 import { getCollection } from "../apis/firebase"
 import moment from "moment";
@@ -64,14 +68,17 @@ function StackNavigator({ navigation }){
 
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName = "Main">
+      <Stack.Navigator initialRouteName = "Landing">
         <Stack.Screen name="Main"
-          children={(props) => 
-            <TabNavigator {...props} records={records} createdAt={createdAt}/>
-          } 
+          component={TabNavigator}
+          initialParams={{records, createdAt}}
           options={{headerShown: false}}/>
         <Stack.Screen name="Map" component={KakaoMap} options={{headerShown: false}}/>
         <Stack.Screen name="KoreaMap" component={KoreaMap} options={{headerShown: false}}/>
+        <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}} options={{headerShown: false}}/>
+        <Stack.Screen name="Calendar" component={Calendar} options={{headerShown: false}}/>
+        <Stack.Screen name="Landing" component={LandingPage} options={{headerShown: false}}/>
+        <Stack.Screen name="Login" component={LoginPage} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
