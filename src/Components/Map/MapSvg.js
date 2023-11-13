@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import Svg, { Path } from 'react-native-svg';
+import { getCollection } from "../../apis/firebase";
 
-function KoreaMap(props) {
+function MapSvg(props) {
     const [basicColor, setBasicColor] = useState('#ccc')
     const [stroke, setStroke] = useState('#fff')
     const [strokeWidth, setStrokeWidth] = useState('1.89')
     const [transform, setTransform] = useState('scale(.2797)')
+    const [getCityData, setGetCityData] = useState([])
+    const [skyblue, setSkyblue] = useState('#89CEEB')
 
     const handlePathClick = (className) => {
         props.onPathClick(className)
@@ -16,7 +19,7 @@ function KoreaMap(props) {
         return (
             <Path
                 className={className}
-                fill={basicColor}
+                fill={getCityData.includes(className)? skyblue: basicColor}
                 stroke={stroke}
                 strokeLinejoin="round"
                 strokeWidth={strokeWidth}
@@ -27,6 +30,18 @@ function KoreaMap(props) {
             />
         )
     }
+
+    useEffect(() => {
+        const getCity = (querySnapshot) => {
+            const CityData = []
+            querySnapshot.forEach((doc) => {
+                const data = doc.data()
+                CityData.push(data.receiveCityValue)
+            })
+            setGetCityData(CityData)
+        }
+        getCollection('MapData', getCity)
+    }, [])
 
     return (
         <SafeAreaView>
@@ -115,7 +130,7 @@ function KoreaMap(props) {
     );
 }
 
-export default KoreaMap;
+export default MapSvg;
 
 const styles = StyleSheet.create({
     basic: {

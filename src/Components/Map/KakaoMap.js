@@ -14,7 +14,8 @@ function KakaoMap({ route }) {
     const receiveLongitude = useRef(null);
     const receiveCityValue = useRef(null);
     const receiveRegionValue = useRef(null);
-    
+    const receiveDongValue = useRef(null);
+
     const sendMessage = () => {
         const data = {
             city: selectedCity,
@@ -29,11 +30,13 @@ function KakaoMap({ route }) {
         const clickLatLng = data.clickLatLng;       // 리액트에서 전달받은 좌표값
         const cityValue = data.cityValue;           // 리액트에서 전달받은 지역값
         const regionValue = data.regionValue;       // 리액트에서 전달받은 구역값
+        const dongValue = data.dongValue;           // 리액트에서 전달받은 동이름
 
         receiveLatitude.current = clickLatLng.Ma
         receiveLongitude.current = clickLatLng.La
         receiveCityValue.current = cityValue
         receiveRegionValue.current = regionValue
+        receiveDongValue.current = dongValue
 
         // console.log('위도 : ' + data.Ma + ' / ' + '경도 : ' + data.La)
         navigation.navigate('TravelRecord', {
@@ -41,6 +44,7 @@ function KakaoMap({ route }) {
             longitude: receiveLongitude.current,
             cityValue: receiveCityValue.current,
             regionValue: receiveRegionValue.current,
+            dongValue: receiveDongValue.current,
         })
     }
 
@@ -48,8 +52,8 @@ function KakaoMap({ route }) {
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-            // source={{ uri: 'https://seongbinbin.github.io/#/nativemap' }}
-            source={{ uri: 'http://192.168.200.14:3000/#/nativemap' }}
+            // source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
+            source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
             onLoad={() => sendMessage()}
         />
     )
