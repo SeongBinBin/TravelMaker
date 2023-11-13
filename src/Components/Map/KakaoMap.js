@@ -36,7 +36,7 @@ function KakaoMap({ route }) {
         receiveRegionValue.current = regionValue
 
         // console.log('위도 : ' + data.Ma + ' / ' + '경도 : ' + data.La)
-        navigation.navigate('TravelRecord', {
+        navigation.navigate('Calendar', {
             latitude: receiveLatitude.current,
             longitude: receiveLongitude.current,
             cityValue: receiveCityValue.current,
@@ -48,7 +48,7 @@ function KakaoMap({ route }) {
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-            source={{ uri: 'https://seongbinbin.github.io/#/nativemap' }}
+            source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
             // source={{ uri: 'http://192.168.200.14:3000/#/nativemap' }}
             onLoad={() => sendMessage()}
         />

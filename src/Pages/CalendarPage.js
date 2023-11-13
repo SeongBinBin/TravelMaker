@@ -49,7 +49,7 @@ function CalendarScreen({ records, createdAt }){
     const newRecord = {
       title,
       contents,
-      createdAt: isToday? new Date( GMTNow + KR_TIME_DIFF ) : new Date(selectedYear, selectedMonth - 1, selectedDate, -9),
+      createdAt: isToday? new Date( GMTNow + KR_TIME_DIFF ) : new Date(selectedYear, selectedMonth - 1, selectedDate),
     }
 
     await addData('Records', newRecord)
@@ -64,7 +64,6 @@ function CalendarScreen({ records, createdAt }){
       setSelectedDate(`0${today.date}`)
     }
 
-    console.log(getCurrentTime())
   }, [])
 
   const removeRecord = () => {

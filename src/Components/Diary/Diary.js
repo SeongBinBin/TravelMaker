@@ -16,8 +16,7 @@ function Diary({
   setDeleteModal
 }){
 
-  const KR_TIME_DIFF = 9 * 60 * 60 * 1000
-
+  
   return (
     <View style={diaryStyles.diaryContainer}>
 
@@ -41,7 +40,7 @@ function Diary({
                 setSelectedId(item.id)
               }}
             >
-              {/* () => removeData('Records', item.id) */}
+              {console.log( moment(item.createdAt.toDate()).format('YYYY-MM-DD'))}
               <Text style={diaryStyles.diaryItemText}>{item.title}</Text>
             </Pressable>
           )

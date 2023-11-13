@@ -1,8 +1,15 @@
 import React from "react";
-import { View, Text, SafeAreaView, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { 
+  View, Text, 
+  SafeAreaView, TextInput, 
+  Keyboard, 
+  TouchableWithoutFeedback, TouchableOpacity,
+  Image, Dimensions
+} from 'react-native'
 
 import Icon from 'react-native-vector-icons/AntDesign'
 import { noteStyles } from "../../Styles/NoteStyle";
+import addPlace from '../../Assets/Imgs/addPlace.png'
 
 function Note({ 
   selectedYear, 
@@ -48,6 +55,7 @@ function Note({
                   value={title}
                 />
               </View>
+
               <View>
                 <TextInput
                   placeholder="내용을 입력해주세요"
@@ -60,13 +68,31 @@ function Note({
               </View>
             </View>
           </View>
+          
+          <View style={{ width: Dimensions.get('window').width * 0.9, marginLeft: 'auto', marginRight: 'auto' }}>
+            <View style={noteStyles.addPlace}>
+              <TouchableWithoutFeedback>
+                <Image
+                  source={addPlace}
+                  style={noteStyles.addPlaceImage}
+                />
+              </TouchableWithoutFeedback>
+              <View>
+                <TextInput
+                  placeholder="장소를 입력해주세요"
+                  style={noteStyles.addPlaceText}
+                />                
+              </View>
+            </View>
 
-          <View style={noteStyles.submit}>
-            <TouchableOpacity onPress={insertRecord}>
-              <Text style={{ fontSize: 18, color: 'white' }}>저장하기</Text>
-            </TouchableOpacity>
+            <View style={noteStyles.submit}>
+              <TouchableOpacity onPress={insertRecord}>
+                <Text style={{ fontSize: 18, color: 'white' }}>저장하기</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
+          
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>

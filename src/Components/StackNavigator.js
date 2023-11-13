@@ -7,6 +7,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
 import KoreaMap from './Map/KoreaMap';
+import CalendarScreen from "../Pages/CalendarPage";
 
 import { getCollection } from "../apis/firebase"
 import moment from "moment";

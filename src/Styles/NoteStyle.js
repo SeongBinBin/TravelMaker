@@ -53,6 +53,21 @@ export const noteStyles = StyleSheet.create({
     backgroundColor: '#a8c9ff',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 50
+    marginBottom: 50,
+    marginTop: 20,
+  },
+  addPlace: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#333',
+  },
+  addPlaceImage: {
+    width: 25,
+    height: 25,
+  },
+  addPlaceText: {
+    fontSize: 18,
   }
 })
