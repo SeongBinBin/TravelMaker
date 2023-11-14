@@ -10,7 +10,7 @@ function Calendar({
   selectedYear, setSelectedYear, 
   selectedMonth, setSelectedMonth, 
   selectedDate,  setSelectedDate,
-  setIsToday, createdAt
+  createdAt
 }){
 
   const week = ["일", "월", "화", "수", "목", "금", "토"]
@@ -48,12 +48,6 @@ function Calendar({
   }, [selectedMonth])
 
   const setDate = (selectedDate) => {
-
-    if(selectedDate === today.date){
-      setIsToday(true)
-    }else{
-      setIsToday(false)
-    }
 
     if(Number(selectedDate) < 10){
       return setSelectedDate(`0${selectedDate}`)

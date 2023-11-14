@@ -8,15 +8,24 @@ import { diaryStyles } from "../../Styles/DiaryStyle";
 
 function Diary({
   records,
-  modalOpen, setModalOpen, 
-  setTitle, setContents, 
   selectedYear, selectedMonth, selectedDate,
-  setIsEdit,
   setSelectedId,
-  setDeleteModal
+  setDeleteModal,
+  navigation
 }){
 
-  
+  const moveToNote = (isEdit, selectedId) => {
+    navigation.navigate('Note', {
+      page: 'Calendar',
+      selectedYear,
+      selectedMonth,
+      selectedDate,
+      selectedId,
+      isEdit
+    })
+  }
+
+
   return (
     <View style={diaryStyles.diaryContainer}>
 
@@ -29,18 +38,12 @@ function Diary({
           (
             <Pressable 
               style={diaryStyles.diaryItem}
-              onPress={() => {
-                setTitle(item.title)
-                setContents(item.contents)
-                setModalOpen(true)
-                setIsEdit(true)
-              }}
+              onPress={() => {moveToNote(true, item.id)}}
               onLongPress={() => {
                 setDeleteModal(true)
                 setSelectedId(item.id)
               }}
             >
-              {console.log( moment(item.createdAt.toDate()).format('YYYY-MM-DD'))}
               <Text style={diaryStyles.diaryItemText}>{item.title}</Text>
             </Pressable>
           )
@@ -50,7 +53,7 @@ function Diary({
 
       <Pressable 
         style={{ position: 'absolute', bottom: 10, right: 10}}
-        onPress={() => {setModalOpen(true); setIsEdit(false);}}
+        onPress={() => {moveToNote(false, '')}}
       >
         <Icon name="pluscircle" size={50} color={'#a8c9ff'}/>
       </Pressable>

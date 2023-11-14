@@ -6,6 +6,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
 import KoreaMap from './Map/KoreaMap';
+import Note from "./Diary/Note";
 
 import { getCollection } from "../apis/firebase"
 import moment from "moment";
@@ -71,6 +72,11 @@ function StackNavigator(){
           options={{headerShown: false}}/>
         <Stack.Screen name="Map" component={KakaoMap} options={{headerShown: false}}/>
         <Stack.Screen name="KoreaMap" component={KoreaMap} options={{headerShown: false}}/>
+        <Stack.Screen name="Note"
+          children={(props) => 
+            <Note {...props} records={records}/>
+          }
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
