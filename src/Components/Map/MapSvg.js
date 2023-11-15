@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import Svg, { Path } from 'react-native-svg';
 import { getCollection } from "../../apis/firebase";
+import auth from '@react-native-firebase/auth';
 
 function MapSvg(props) {
     const [basicColor, setBasicColor] = useState('#ccc')
@@ -31,7 +32,21 @@ function MapSvg(props) {
         )
     }
 
+    // useEffect(() => {
+    //     const getCity = (querySnapshot) => {
+    //         const CityData = []
+    //         querySnapshot.forEach((doc) => {
+    //             const data = doc.data()
+    //             CityData.push(data.receiveCityValue)
+    //         })
+    //         setGetCityData(CityData)
+    //     }
+    //     getCollection('MapData', getCity)
+    // }, [])
+
     useEffect(() => {
+        const currentUser = auth().currentUser
+
         const getCity = (querySnapshot) => {
             const CityData = []
             querySnapshot.forEach((doc) => {
@@ -40,7 +55,11 @@ function MapSvg(props) {
             })
             setGetCityData(CityData)
         }
-        getCollection('MapData', getCity)
+
+        if(currentUser){
+            const userUID = currentUser.uid
+            getCollection(`UserData/${userUID}/MapData`, getCity)
+        }
     }, [])
 
     return (
