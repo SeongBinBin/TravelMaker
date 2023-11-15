@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { getFullCalendar } from "../Calendar/time";
 import { addData, updateData } from "../../apis/firebase";
+import auth from '@react-native-firebase/auth';
 
 import Icon from 'react-native-vector-icons/AntDesign'
 import { noteStyles } from "../../Styles/NoteStyle";
@@ -63,9 +64,19 @@ function Note({ route, navigation, records }){
     setSelectedDate(data.selectedDate)
     setIsEdit(data.isEdit)
     setSelectedId(data.selectedId)
+
+    checkIsToday(data);
     
     setNoteContents(data.selectedId);
 
+  }
+
+  const checkIsToday = (data) => {
+    if(today === `${data.selectedYear}-${data.selectedMonth}-${data.selectedDate}` 
+      || today === `${data.selectedYear}-${data.selectedMonth}-0${data.selectedDate}`){
+        setIsToday(true)
+      }
+    else setIsToday(false)
   }
 
   const setNoteContents = (id) => {
@@ -79,7 +90,9 @@ function Note({ route, navigation, records }){
 
   const insertRecord = async () => {
 
-    if(isEdit) await editData();
+    const user = auth().currentUser
+
+    if(isEdit) await editData(user);
     else{
       const now = new Date() // 서버 시간 기준 현재 로컬 시간
       const GMTNow = now.getTime() + now.getTimezoneOffset() * 60 * 1000
@@ -95,17 +108,17 @@ function Note({ route, navigation, records }){
         regionValue,
       }
 
-      await addData('Records', newRecord)
+      await addData(`UserData/${user.uid}/MapData`, newRecord)
       .catch(error => console.error(error))
 
     }
     moveToback();
   }
 
-  const editData = async () => {
+  const editData = async (user) => {
 
     if(isEditPlace){
-      await updateData('Records', route.params.selectedId, {
+      await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
         latitude,
         longitude,
         cityValue,
@@ -120,7 +133,7 @@ function Note({ route, navigation, records }){
       setIsEditPlace(false)
     }
 
-    await updateData('Records', route.params.selectedId, {
+    await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
       title,
       contents,
     })
