@@ -13,7 +13,7 @@ import MapPage from "../Pages/MapPage";
 
 const Tab = createBottomTabNavigator()
 
-function TabNavigator({ navigation, records, createdAt }){
+function TabNavigator({ navigation, records, createdAt, route }){
 
   return(
       <Tab.Navigator

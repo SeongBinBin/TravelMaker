@@ -36,14 +36,12 @@ function KakaoMap({ route }) {
         receiveRegionValue.current = regionValue
 
         // console.log('위도 : ' + data.Ma + ' / ' + '경도 : ' + data.La)
-        navigation.navigate('Calendar', {
-            screen: 'Calendar',
-            params: {
-                latitude: receiveLatitude.current,
-                longitude: receiveLongitude.current,
-                cityValue: receiveCityValue.current,
-                regionValue: receiveRegionValue.current,
-            },
+        navigation.navigate('Note', {
+            page: 'Map',
+            latitude: receiveLatitude.current,
+            longitude: receiveLongitude.current,
+            cityValue: receiveCityValue.current,
+            regionValue: receiveRegionValue.current,
 
         })
     }

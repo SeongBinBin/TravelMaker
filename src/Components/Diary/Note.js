@@ -31,6 +31,8 @@ function Note({ route, navigation, records }){
   const [ contents, setContents ] = useState('')
   const [ place, setPlace ] = useState('')
 
+  const [ isCalendar, setIsCalendar ] = useState(false)
+
   const [ latitude, setLatitude ] = useState('')
   const [ longitude, setLongitude ] = useState('')
   const [ cityValue, setCityValue ] = useState('')
@@ -56,13 +58,13 @@ function Note({ route, navigation, records }){
     setSelectedMonth(route.params.selectedMonth)
     setSelectedDate(route.params.selectedDate)
     setIsEdit(route.params.isEdit)
-
+    setSelectedId(route.params.selectedId)
+    
     setNoteContents(route.params.selectedId);
 
   }
 
   const setNoteContents = (id) => {
-    console.log(records)
     records.forEach((record) => {
       if(record.id === id){
         setTitle(record.title)
@@ -95,8 +97,6 @@ function Note({ route, navigation, records }){
     }
     moveToback();
   }
-
-
 
   const editData = async () => {
 
@@ -131,17 +131,41 @@ function Note({ route, navigation, records }){
   const moveToback = () => {
     setTitle('')
     setContents('')
-    if(route.params.page === 'Calendar'){
+
+    if(route.params.page === "Calendar"){
 
       navigation.navigate("Main", {
-        screen: `${route.params.page}`
+        screen: `${route.params.page}`,
       })
-
-      return;
     }
 
-    navigation.navigate(`${route.params.page}`)
+    if(route.params.page === "Map"){
+
+      navigation.navigate("Map", {
+        city: cityValue,
+        region: regionValue,
+        latitude: latitude,
+        longitude: longitude,
+      })
+
+    }
+
+    return;
+  }
+
+  const moveToMap = () => {
+    navigation.navigate('Main', {
+      screen: 'Home',
+      params: {
+        isCalendar: true,
+        selectedYear,
+        selectedMonth,
+        selectedDate,
+        selectedId,
+        isEdit
+      }
     
+    })
   }
 
   const hideKeyboard = () => {
@@ -190,7 +214,7 @@ function Note({ route, navigation, records }){
           
           <View style={{ width: Dimensions.get('window').width * 0.9, marginLeft: 'auto', marginRight: 'auto' }}>
             <View style={noteStyles.addPlace}>
-              <TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={() => moveToMap()}>
                 <Image
                   source={addPlace}
                   style={noteStyles.addPlaceImage}

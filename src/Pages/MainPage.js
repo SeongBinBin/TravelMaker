@@ -8,7 +8,7 @@ function MainPage(){
     <SafeAreaView style={styles.block}>
       <StatusBar></StatusBar>
       <View>
-        <KoreaMap />
+        <KoreaMap/>
       </View>
     </SafeAreaView>
   )
