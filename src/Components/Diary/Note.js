@@ -40,27 +40,31 @@ function Note({ route, navigation, records }){
 
   useEffect(() => {
 
-    if(route.params !== undefined && route.params.page === 'Map') fromMap();
-    if(route.params !== undefined && route.params.page === 'Calendar') fromCalendar();
+    if(route.params !== undefined && route.params.page === 'Map'){
+      fromMap(route.params);
+
+      if(route.params.isCalendar) fromCalendar(route.params.calendar)
+    } 
+    if(route.params !== undefined && route.params.page === 'Calendar') fromCalendar(route.params);
     
   }, [route])
 
-  const fromMap = () => {
-    setLatitude(route.params.latitude)
-    setLongitude(route.params.longitude)
-    setCityValue(route.params.cityValue)
-    setRegionValue(route.params.regionValue)
+  const fromMap = (data) => {
+    setLatitude(data.latitude)
+    setLongitude(data.longitude)
+    setCityValue(data.cityValue)
+    setRegionValue(data.regionValue)
   }
 
-  const fromCalendar = () => {
+  const fromCalendar = (data) => {
 
-    setSelectedYear(route.params.selectedYear)
-    setSelectedMonth(route.params.selectedMonth)
-    setSelectedDate(route.params.selectedDate)
-    setIsEdit(route.params.isEdit)
-    setSelectedId(route.params.selectedId)
+    setSelectedYear(data.selectedYear)
+    setSelectedMonth(data.selectedMonth)
+    setSelectedDate(data.selectedDate)
+    setIsEdit(data.isEdit)
+    setSelectedId(data.selectedId)
     
-    setNoteContents(route.params.selectedId);
+    setNoteContents(data.selectedId);
 
   }
 
@@ -157,7 +161,6 @@ function Note({ route, navigation, records }){
     navigation.navigate('Main', {
       screen: 'Home',
       params: {
-        isCalendar: true,
         selectedYear,
         selectedMonth,
         selectedDate,

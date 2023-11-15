@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { WebView } from 'react-native-webview';
-import { useNavigation } from "@react-navigation/native";
+import { TabRouter, useNavigation } from "@react-navigation/native";
 
 function KakaoMap({ route }) {
     const navigation = useNavigation();
@@ -15,6 +15,8 @@ function KakaoMap({ route }) {
     const receiveCityValue = useRef(null);
     const receiveRegionValue = useRef(null);
     
+    console.log(route.params)
+
     const sendMessage = () => {
         const data = {
             city: selectedCity,
@@ -42,6 +44,8 @@ function KakaoMap({ route }) {
             longitude: receiveLongitude.current,
             cityValue: receiveCityValue.current,
             regionValue: receiveRegionValue.current,
+            calendar: route.params.calendar,
+            isCalendar: route.params.calendar === undefined? false : true
 
         })
     }

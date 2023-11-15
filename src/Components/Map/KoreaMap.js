@@ -8,7 +8,7 @@ import { WebView } from 'react-native-webview';
 import Region from '../../Assets/Json/Region.json';
 import Colors from "../../Styles/Colors";
 
-function KoreaMap() {
+function KoreaMap({ route }) {
     const navigation = useNavigation();
     const [selectedCity, setSelectedCity] = useState(null);
     const regionName = useRef(null);
@@ -26,6 +26,7 @@ function KoreaMap() {
         longitudeRef.current = selectedCityInfo.longitude
 
         navigation.navigate('Map', {
+            calendar: route.params,
             selectedCity: selectedCity,
             regionName: regionName.current,
             latitudeRef: latitudeRef.current,

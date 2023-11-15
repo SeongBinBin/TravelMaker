@@ -3,12 +3,12 @@ import { SafeAreaView, View, Text, StyleSheet, StatusBar } from 'react-native'
 
 import KoreaMap from '../Components/Map/KoreaMap'
 
-function MainPage(){
+function MainPage({ route }){
   return (
     <SafeAreaView style={styles.block}>
       <StatusBar></StatusBar>
       <View>
-        <KoreaMap/>
+        <KoreaMap route={route}/>
       </View>
     </SafeAreaView>
   )
