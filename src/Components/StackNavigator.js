@@ -10,7 +10,8 @@ import TravelRecord from "./TravelRecord";
 import Calendar from "./Calendar/Calendar";
 import LoginPage from "../Pages/LoginPage";
 import LandingPage from "../Pages/LandingPage";
-import MapTabStack from "./MapTabStack";
+import SignupPage from "../Pages/SignupPage";
+import IDPWSearchPage from "../Pages/IDPWSearchPage";
 
 import { getCollection } from "../apis/firebase"
 import moment from "moment";
@@ -79,6 +80,8 @@ function StackNavigator({ navigation }){
         <Stack.Screen name="Calendar" component={Calendar} options={{headerShown: false}}/>
         <Stack.Screen name="Landing" component={LandingPage} options={{headerShown: false}}/>
         <Stack.Screen name="Login" component={LoginPage} options={{headerShown: false}}/>
+        <Stack.Screen name="Signup" component={SignupPage} options={{headerShown: false}}/>
+        <Stack.Screen name="IDPWSearch" component={IDPWSearchPage} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { SafeAreaView, View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { addData } from '../apis/firebase'
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore'
 
 import Colors from '../Styles/Colors'
 
@@ -23,13 +25,23 @@ function TravelRecord({ route }){
         mainText,
     }
 
-    const submitMapData = () => {
+    const submitMapData = async () => {
         if(title === ''){
             Alert.alert("제목을 입력해주세요.")
-        }else{
-            addData('MapData', mapData)
-            setTitle('')
-            setMainText('')
+        } else {
+            try {
+                const user = auth().currentUser; // 현재 로그인 중인 사용자 정보 가져오기
+                if (user) {
+                    const uid = user.uid // 현재 사용자의 uid
+                    const mapDataRef = firestore().collection('UserData').doc(uid).collection('MapData') // 현재 사용자의 uid에 해당하는 컬렉션에 접근
+    
+                    await mapDataRef.add(mapData) // MapData를 해당 컬렉션에 추가
+                    setTitle('')
+                    setMainText('')
+                }
+            } catch (error) {
+                console.error(error)
+            }
         }
     }
 
