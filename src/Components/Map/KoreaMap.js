@@ -4,6 +4,7 @@ import { SafeAreaView, View, Text, FlatList, StyleSheet, TouchableOpacity } from
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
 import { getCollection } from "../../apis/firebase";
+import auth from '@react-native-firebase/auth';
 
 import Region from '../../Assets/Json/Region.json';
 import Colors from "../../Styles/Colors";
@@ -46,6 +47,8 @@ function KoreaMap() {
     }
     
     useEffect(() => {
+        const currentUser = auth().currentUser
+
         const getRegion = (querySnapshot) => {
             const regionData = []
             const dongData = []
@@ -58,8 +61,11 @@ function KoreaMap() {
             setGetDongData(dongData)
             console.log('\n'+regionData +'\n'+ dongData)
         }
-        
-        getCollection('MapData', getRegion)
+
+        if(currentUser){
+            const userUID = currentUser.uid
+            getCollection(`UserData/${userUID}/MapData`, getRegion)
+        }
     }, [])
 
     const checkClicked = () => {

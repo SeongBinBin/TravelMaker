@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
-import { WebView } from 'react-native-webview';
+import React, { useRef, useState, useEffect } from 'react';
+import { WebView, View, Text } from 'react-native-webview';
 import { useNavigation } from "@react-navigation/native";
+import auth from '@react-native-firebase/auth';
 
 function KakaoMap({ route }) {
     const navigation = useNavigation();
@@ -15,6 +16,14 @@ function KakaoMap({ route }) {
     const receiveCityValue = useRef(null);
     const receiveRegionValue = useRef(null);
     const receiveDongValue = useRef(null);
+    const userUID = useRef(null)
+
+    useEffect(() => {
+        const currentUser = auth().currentUser;
+        if (currentUser) {
+            userUID.current = currentUser.uid
+        }
+    })
 
     const sendMessage = () => {
         const data = {
@@ -22,6 +31,7 @@ function KakaoMap({ route }) {
             region: regionName,
             latitude: latitudeRef,
             longitude: longitudeRef,
+            userUID: userUID.current,
         }
         webViewRef.current.postMessage(JSON.stringify(data))
     }
@@ -52,7 +62,7 @@ function KakaoMap({ route }) {
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-              // source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
+            //   source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
               source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
             onLoad={() => sendMessage()}
         />
