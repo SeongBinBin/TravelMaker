@@ -6,6 +6,12 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
 import KoreaMap from './Map/KoreaMap';
+import TravelRecord from "./TravelRecord";
+import Calendar from "./Calendar/Calendar";
+import LoginPage from "../Pages/LoginPage";
+import LandingPage from "../Pages/LandingPage";
+import SignupPage from "../Pages/SignupPage";
+import IDPWSearchPage from "../Pages/IDPWSearchPage";
 import Note from "./Diary/Note";
 
 import { getCollection } from "../apis/firebase"
@@ -64,14 +70,19 @@ function StackNavigator(){
 
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName = "Main" screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName = "Landing" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Main"
-          children={(props) => 
-            <TabNavigator {...props} records={records} createdAt={createdAt}/>
-          } 
+          component={TabNavigator}
+          initialParams={{records, createdAt}}
           options={{headerShown: false}}/>
         <Stack.Screen name="Map" component={KakaoMap} options={{headerShown: false}}/>
         <Stack.Screen name="KoreaMap" component={KoreaMap} options={{headerShown: false}}/>
+        <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}} options={{headerShown: false}}/>
+        <Stack.Screen name="Calendar" component={Calendar} options={{headerShown: false}}/>
+        <Stack.Screen name="Landing" component={LandingPage} options={{headerShown: false}}/>
+        <Stack.Screen name="Login" component={LoginPage} options={{headerShown: false}}/>
+        <Stack.Screen name="Signup" component={SignupPage} options={{headerShown: false}}/>
+        <Stack.Screen name="IDPWSearch" component={IDPWSearchPage} options={{headerShown: false}}/>
         <Stack.Screen name="Note"
           children={(props) => 
             <Note {...props} records={records}/>

@@ -3,7 +3,8 @@ import MapSvg from "./MapSvg";
 import { SafeAreaView, View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
-import { WebView } from 'react-native-webview';
+import { getCollection } from "../../apis/firebase";
+import auth from '@react-native-firebase/auth';
 
 import Region from '../../Assets/Json/Region.json';
 import Colors from "../../Styles/Colors";
@@ -11,6 +12,8 @@ import Colors from "../../Styles/Colors";
 function KoreaMap({ route }) {
     const navigation = useNavigation();
     const [selectedCity, setSelectedCity] = useState(null);
+    const [getRegionData, setGetRegionData] = useState([]);
+    const [getDongData, setGetDongData] = useState([]);
     const regionName = useRef(null);
     const latitudeRef = useRef(null);
     const longitudeRef = useRef(null);
@@ -44,11 +47,35 @@ function KoreaMap({ route }) {
         setSelectedCity(null)
     }
     
+    useEffect(() => {
+        const currentUser = auth().currentUser
+
+        const getRegion = (querySnapshot) => {
+            const regionData = []
+            const dongData = []
+            querySnapshot.forEach((doc) => {
+                const data = doc.data()
+                regionData.push(data.receiveRegionValue)
+                dongData.push(data.receiveDongValue)
+            })
+            setGetRegionData(regionData)
+            setGetDongData(dongData)
+            console.log('\n'+regionData +'\n'+ dongData)
+        }
+
+        if(currentUser){
+            const userUID = currentUser.uid
+            getCollection(`UserData/${userUID}/MapData`, getRegion)
+        }
+    }, [])
+
     const checkClicked = () => {
-        if(selectedCity === null){
-            return null
-        }else{
-            return(
+        if (selectedCity === null) {
+            return null;
+        } else {
+            const allSelected = selectedRegions.every(item => getRegionData.includes(item));
+            
+            return (
                 <View style={styles.region}>
                     <View style={styles.regionTitle}>
                         <Text style={styles.regionText}>
@@ -64,7 +91,10 @@ function KoreaMap({ route }) {
                         keyExtractor={(index) => index.toString()}
                         renderItem={({ item }) => (
                             <TouchableOpacity
-                                style={styles.item}
+                                style={[
+                                    styles.item,
+                                    getRegionData.includes(item) && { backgroundColor: Colors.skyblue }
+                                ]}
                                 onPress={() => {
                                     handleRegionClick(item);
                                 }}
@@ -74,8 +104,13 @@ function KoreaMap({ route }) {
                             </TouchableOpacity>
                         )}
                     />
+                    {/* {allSelected && (
+                        <Text>
+                            {`${selectedCity}의 모든 지역이 선택됨`}
+                        </Text>
+                    )} */}
                 </View>
-            )
+            );
         }
     }
 
