@@ -3,6 +3,7 @@ import { Modal, View, Text, Pressable, SafeAreaView, StatusBar } from 'react-nat
 
 import { getFullCalendar } from '../Components/Calendar/time'
 import { addData, removeData, updateData } from '../apis/firebase'
+import auth from '@react-native-firebase/auth';
 
 import Calendar from '../Components/Calendar/Calendar'
 import Diary from '../Components/Diary/Diary'
@@ -32,7 +33,8 @@ function CalendarScreen({ records, createdAt, navigation }){
   }, [])
 
   const removeRecord = () => {
-    removeData('Records', selectedId)
+    const user = auth().currentUser
+    removeData(`UserData/${user.uid}/MapData`, selectedId)
     setDeleteModal(false)
   }
 

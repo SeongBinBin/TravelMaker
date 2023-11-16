@@ -16,6 +16,7 @@ import IDPWSearchPage from "../Pages/IDPWSearchPage";
 import Note from "./Diary/Note";
 
 import { getCollection } from "../apis/firebase"
+import auth from '@react-native-firebase/auth';
 import moment from "moment";
 
 const Stack = createNativeStackNavigator()
@@ -28,6 +29,8 @@ function StackNavigator(){
   const [isLoggedin, setIsLoggedin] = useState(false)
 
   useEffect(() => {
+    const currentUser = auth().currentUser
+
     function onResult(querySnapshot){
       const list = []
       const date = []
@@ -66,12 +69,16 @@ function StackNavigator(){
     }
     getLocalEmail()
 
-    return getCollection('Records',
-                          onResult, onError,
-                          null,
-                          {exists: true, condition: ['createdAt', 'asc']},
-                          null
-                        )
+    if(currentUser){
+      const userUID = currentUser.uid
+      return getCollection(`UserData/${userUID}/MapData`,
+                            onResult, onError,
+                            null,
+                            {exists: true, condition: ['createdAt', 'asc']},
+                            null
+                          )
+    }
+
 
   }, [])
 

@@ -9,11 +9,66 @@ import SettingPage from "../Pages/SettingPage";
 import Colors from "../Styles/Colors";
 import MapPage from "../Pages/MapPage";
 
-
+import { getCollection } from "../apis/firebase"
+import auth from '@react-native-firebase/auth';
+import moment from "moment";
 
 const Tab = createBottomTabNavigator()
 
-function TabNavigator({ navigation, records, createdAt, route }){
+function TabNavigator({ navigation, route }){
+  
+  const [ records, setRecords ] = useState([])
+  const [ loading, setLoading ] = useState(true)
+  const [ createdAt, setCreatedAt ] = useState([])
+
+  useEffect(() => {
+    const currentUser = auth().currentUser
+
+    function onResult(querySnapshot){
+      const list = []
+      const date = []
+      querySnapshot.forEach(doc => {
+        list.push({
+          ...doc.data(),
+          id: doc.id,
+        })
+        list.forEach((data) => {
+          if(data.createdAt !== null){
+            date.push(moment(data.createdAt.toDate()).format('YYYY-MM-DD'))
+          }
+        })
+      })
+
+      setRecords(list)
+      setLoading(false)
+      setCreatedAt(date)
+    }
+
+    function onError(error){
+      console.error(`${error} occured when reading records`)
+    }
+
+    if(currentUser){
+      const userUID = currentUser.uid
+      return getCollection(`UserData/${userUID}/MapData`,
+                            onResult, onError,
+                            null,
+                            {exists: true, condition: ['createdAt', 'asc']},
+                            null
+                          )
+    }
+
+
+  }, [])
+
+  if(loading){
+    return (
+        <View style={styles.block}>
+          <ActivityIndicator size="large" color="#0047ab"/>
+          <Text style={styles.loadingText}>loading...</Text>
+        </View>
+    )
+  }
 
   return(
       <Tab.Navigator

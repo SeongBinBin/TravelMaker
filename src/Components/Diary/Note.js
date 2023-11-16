@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { getFullCalendar } from "../Calendar/time";
 import { addData, updateData } from "../../apis/firebase";
+import auth from '@react-native-firebase/auth';
 
 import Icon from 'react-native-vector-icons/AntDesign'
 import { noteStyles } from "../../Styles/NoteStyle";
@@ -40,6 +41,7 @@ function Note({ route, navigation, records }){
 
   useEffect(() => {
 
+    console.log(route.params)
     if(route.params !== undefined && route.params.page === 'Map'){
       fromMap(route.params);
 
@@ -61,11 +63,13 @@ function Note({ route, navigation, records }){
     setSelectedYear(data.selectedYear)
     setSelectedMonth(data.selectedMonth)
     setSelectedDate(data.selectedDate)
+    if(route.params.page === 'Calendar' && data.selectedId !== '') setNoteContents(data.selectedId)
+    else {
+      setTitle(data.title)
+      setContents(data.contents)
+    }
     setIsEdit(data.isEdit)
-    setSelectedId(data.selectedId)
-    
-    setNoteContents(data.selectedId);
-
+    checkIsToday(data);
   }
 
   const setNoteContents = (id) => {
@@ -77,9 +81,19 @@ function Note({ route, navigation, records }){
     })
   }
 
+  const checkIsToday = (data) => {
+    if(today === `${data.selectedYear}-${data.selectedMonth}-${data.selectedDate}` 
+      || today === `${data.selectedYear}-${data.selectedMonth}-0${data.selectedDate}`){
+        setIsToday(true)
+      }
+    else setIsToday(false)
+  }
+
   const insertRecord = async () => {
 
-    if(isEdit) await editData();
+    const user = auth().currentUser
+
+    if(isEdit) await editData(user);
     else{
       const now = new Date() // 서버 시간 기준 현재 로컬 시간
       const GMTNow = now.getTime() + now.getTimezoneOffset() * 60 * 1000
@@ -95,17 +109,17 @@ function Note({ route, navigation, records }){
         regionValue,
       }
 
-      await addData('Records', newRecord)
+      await addData(`UserData/${user.uid}/MapData`, newRecord)
       .catch(error => console.error(error))
 
     }
     moveToback();
   }
 
-  const editData = async () => {
+  const editData = async (user) => {
 
-    if(isEditPlace){
-      await updateData('Records', route.params.selectedId, {
+    if(route.params.isCalendar){
+      await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
         latitude,
         longitude,
         cityValue,
@@ -120,7 +134,7 @@ function Note({ route, navigation, records }){
       setIsEditPlace(false)
     }
 
-    await updateData('Records', route.params.selectedId, {
+    await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
       title,
       contents,
     })
@@ -135,12 +149,15 @@ function Note({ route, navigation, records }){
   const moveToback = () => {
     setTitle('')
     setContents('')
+    setSelectedId('')
 
-    if(route.params.page === "Calendar"){
+    if(route.params.page === "Calendar" || route.params.isCalendar){
 
       navigation.navigate("Main", {
-        screen: `${route.params.page}`,
+        screen: "Calendar",
       })
+
+      return;
     }
 
     if(route.params.page === "Map"){
@@ -152,19 +169,22 @@ function Note({ route, navigation, records }){
         longitude: longitude,
       })
 
+      return;
     }
 
-    return;
   }
 
   const moveToMap = () => {
+
     navigation.navigate('Main', {
       screen: 'Home',
       params: {
         selectedYear,
         selectedMonth,
         selectedDate,
-        selectedId,
+        selectedId: route.params.selectedId,
+        title,
+        contents,
         isEdit
       }
     
