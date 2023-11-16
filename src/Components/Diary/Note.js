@@ -8,7 +8,7 @@ import {
 import { getFullCalendar } from "../Calendar/time";
 import { addData, updateData } from "../../apis/firebase";
 import auth from '@react-native-firebase/auth';
-
+import firestore from '@react-native-firebase/firestore'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { noteStyles } from "../../Styles/NoteStyle";
 import addPlace from '../../Assets/Imgs/addPlace.png'
@@ -38,10 +38,14 @@ function Note({ route, navigation, records }){
   const [ longitude, setLongitude ] = useState('')
   const [ cityValue, setCityValue ] = useState('')
   const [ regionValue, setRegionValue ] = useState('')
+  const [ regionFullName, setRegionFullName] = useState('')
+  const [ getFullName, setGetFullName ] = useState('')
+  const [ changeLatitude, setChangeLatitude ] = useState('')
+  const [ changeLongitude, setChangeLongitude ] = useState('')
 
   useEffect(() => {
 
-    console.log(route.params)
+    // console.log(route.params)
     if(route.params !== undefined && route.params.page === 'Map'){
       fromMap(route.params);
 
@@ -56,6 +60,7 @@ function Note({ route, navigation, records }){
     setLongitude(data.longitude)
     setCityValue(data.cityValue)
     setRegionValue(data.regionValue)
+    setRegionFullName(data.regionFullName)
   }
 
   const fromCalendar = (data) => {
@@ -75,8 +80,12 @@ function Note({ route, navigation, records }){
   const setNoteContents = (id) => {
     records.forEach((record) => {
       if(record.id === id){
+        setLatitude(record.latitude)
+        setLongitude(record.longitude)
         setTitle(record.title)
         setContents(record.contents)
+        setPlace(record.cityValue)
+        setGetFullName(record.regionFullName)
       }
     })
   }
@@ -93,8 +102,9 @@ function Note({ route, navigation, records }){
 
     const user = auth().currentUser
 
-    if(isEdit) await editData(user);
-    else{
+    if(isEdit){
+      await editData(user);
+    }else{
       const now = new Date() // 서버 시간 기준 현재 로컬 시간
       const GMTNow = now.getTime() + now.getTimezoneOffset() * 60 * 1000
       const KR_TIME_DIFF = 9 * 60 * 60 * 1000
@@ -107,6 +117,7 @@ function Note({ route, navigation, records }){
         longitude,
         cityValue,
         regionValue,
+        regionFullName,
       }
 
       await addData(`UserData/${user.uid}/MapData`, newRecord)
@@ -119,7 +130,7 @@ function Note({ route, navigation, records }){
   const editData = async (user) => {
 
     if(route.params.isCalendar){
-      await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
+      await updateData(`UserData/${user.uid}/MapData`, route.params.calendar.selectedId, {
         latitude,
         longitude,
         cityValue,
@@ -134,9 +145,11 @@ function Note({ route, navigation, records }){
       setIsEditPlace(false)
     }
 
-    await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
+    await updateData(`UserData/${user.uid}/MapData`, route.params.calendar.selectedId, {
       title,
       contents,
+      latitude,
+      longitude,
     })
     .catch(error => console.error(error))
 
@@ -231,6 +244,10 @@ function Note({ route, navigation, records }){
                   onChangeText={(text) => setContents(text)}
                   value={contents}
                 />
+                <Text>기존위도 : {latitude}</Text>
+                <Text>기존경도 : {longitude}</Text>
+                <Text>변경위도 : {changeLatitude}</Text>
+                <Text>변경경도 : {changeLongitude}</Text>
               </View>
             </View>
           </View>
@@ -244,10 +261,11 @@ function Note({ route, navigation, records }){
                 />
               </TouchableWithoutFeedback>
               <View>
-                <TextInput
+                {/* <TextInput
                   placeholder="장소를 입력해주세요"
                   style={noteStyles.addPlaceText}
-                />                
+                />                 */}
+                <Text style={noteStyles.addPlaceText}>{getFullName}</Text>
               </View>
             </View>
 

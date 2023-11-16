@@ -51,7 +51,7 @@ function MapSvg(props) {
             const CityData = []
             querySnapshot.forEach((doc) => {
                 const data = doc.data()
-                CityData.push(data.receiveCityValue)
+                CityData.push(data.cityValue)
             })
             setGetCityData(CityData)
         }

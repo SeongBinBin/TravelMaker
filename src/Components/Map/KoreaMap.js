@@ -49,22 +49,21 @@ function KoreaMap({ route }) {
     
     useEffect(() => {
         const currentUser = auth().currentUser
-
+    
         const getRegion = (querySnapshot) => {
             const regionData = []
             const dongData = []
             querySnapshot.forEach((doc) => {
                 const data = doc.data()
-                regionData.push(data.receiveRegionValue)
-                dongData.push(data.receiveDongValue)
+                regionData.push(data.regionValue)
+                // dongData.push(data.receiveDongValue)
             })
             setGetRegionData(regionData)
-            setGetDongData(dongData)
-            // console.log('\n'+regionData +'\n'+ dongData)
+            // setGetDongData(dongData)
         }
 
         if(currentUser){
-            const userUID = currentUser.uid
+            const userUID = currentUser.uid            
             getCollection(`UserData/${userUID}/MapData`, getRegion)
         }
     }, [])
