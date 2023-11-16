@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, Dimensions, TouchableOpacity, View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
+import Colors from '../Styles/Colors';
 
 function LandingPage(){
     const navigation = useNavigation();
@@ -18,7 +19,7 @@ function LandingPage(){
     const goToLogin = () => {
         navigation.navigate('Login')
     }
-
+    // 1080 x 2400 or 412dp x 915dp
     return(
         <SafeAreaView style={styles.block}>
             <ScrollView
@@ -29,19 +30,27 @@ function LandingPage(){
                 showsHorizontalScrollIndicator={false}
                 onScroll={setCurrentPage}
             >
-                <View style={{width, height}}>
-                    <Text>랜딩 페이지 1</Text>
-                </View>
-                <View style={{width, height}}>
-                    <Text>랜딩 페이지 2</Text>
-                </View>
-                <View style={{width, height}}>
-                    <Text>랜딩 페이지 3</Text>
-                </View>
+                <ImageBackground source={require('../Assets/Imgs/skyplane.png')} style={{width, height}} resizeMode='stretch'>
+                    <View style={{width, height}}>
+                        <Text style={[styles.landingText, {padding: 80,}]}>여행을 좋아하시나요?</Text>
+                    </View>
+                </ImageBackground>
+                
+                <ImageBackground source={require('../Assets/Imgs/note.png')} style={{width, height}} resizeMode='stretch'>
+                    <View>
+                        <Text style={[styles.landingText, {padding: 80,}]}>{`나를 기록하는 것도\n좋아하신다구요?`}</Text>
+                    </View>
+                </ImageBackground>
+
+                <ImageBackground source={require('../Assets/Imgs/sky.png')} style={{width, height}} resizeMode='stretch'>
+                    <View>
+                        <Text style={[styles.landingText, {padding: 60,}]}>{`그런 당신에게 아주 잘맞는\n다이어리가 있습니다.`}</Text>
+                    </View>
+                </ImageBackground>
             </ScrollView>
-            <View style={[styles.loginBtn, { display: currentPageIndex === 2 ? 'flex' : 'none' }]}>
-                <TouchableOpacity onPress={goToLogin}>
-                    <Text>LOGIN</Text>
+            <View style={{ display: currentPageIndex === 2 ? 'flex' : 'none' }}>
+                <TouchableOpacity onPress={goToLogin} style={styles.loginBtn}>
+                    <Text style={{textAlign: 'center', fontFamily: 'SUIT', fontWeight: 'bold',}}>로그인</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.scrollIndicatorWrapper}>
@@ -56,7 +65,8 @@ export default LandingPage
 
 const styles = StyleSheet.create({
     block: {
-      flex: 1,
+        position: 'relative',
+        flex: 1,
     },
     scrollIndicatorWrapper:{
         position: 'absolute',
@@ -64,20 +74,30 @@ const styles = StyleSheet.create({
         bottom: 50,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        gap: 10,
     },
     scrollIndicator: {
         height: 10,
         width: 10,
         borderRadius: 10 / 2,
-        backgroundColor: '#aaa',
-        marginLeft: 10,
+        backgroundColor: Colors.black,
     },
     loginBtn: {
         position: 'absolute',
-        bottom: 100,
-        justifyContent: 'center',
+        bottom: 200,
+        padding: 10,
+        width: '50%',
         alignSelf: 'center',
         borderWidth: 1,
+        borderRadius: 5,
     },
+    landingText: {
+        fontFamily: 'Cafe24Supermagic-Bold',
+        fontSize: 30,
+        width: '100%',
+        position: 'absolute',        
+        color: Colors.white,
+        textAlign: 'center',
+    }
 })

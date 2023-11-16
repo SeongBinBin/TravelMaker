@@ -60,7 +60,7 @@ function KoreaMap({ route }) {
             })
             setGetRegionData(regionData)
             setGetDongData(dongData)
-            console.log('\n'+regionData +'\n'+ dongData)
+            // console.log('\n'+regionData +'\n'+ dongData)
         }
 
         if(currentUser){
@@ -117,7 +117,7 @@ function KoreaMap({ route }) {
     return (
         <SafeAreaView style={styles.mapContainer}>
             <View>
-                <MapSvg onPathClick={handlePathClick}/>
+                <MapSvg onPathClick={handlePathClick} style={{top: 20,}}/>
             </View>
             {checkClicked()}
         </SafeAreaView>

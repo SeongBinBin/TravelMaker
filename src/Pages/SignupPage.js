@@ -9,33 +9,24 @@ import firestore from '@react-native-firebase/firestore';
 
 function SignupPage() {
     const navigation = useNavigation()
-    const [initializing, setInitializing] = useState(true);
-    const [user, setUser] = useState();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [birth, setBirth] = useState('');
     const [password, setPassword] = useState('');
     const [passwordMatch, setPasswordMatch] = useState('');
     const [errorPasswordCheckMessage, setErrorPasswordCheckMessage] = useState('')
     const [errorEmailMessage, setErrorEmailMessage] = useState('')
-    const [registerName, setRegisterName] = useState('')
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
-
-    // function onAuthStateChanged(user) {     // 회원가입 후 로그인 상태 유지
-    //   setUser(user);
-    //   if (initializing) setInitializing(false);
-    // }
-
-    // useEffect(() => {
-    //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    //   return subscriber;
-    // }, []);
-
-    // if (initializing) return null;          // 회원가입 후 로그인 상태 유지
+    const [changeBtn, setChangeBtn] = useState(false)
 
     const register = async () => {
         if(email === ''){
             Alert.alert('이메일을 입력해주세요.')
+        }else if(name === ''){
+            Alert.alert('이름을 입력해주세요.')
+        }else if(birth === ''){
+            Alert.alert('생년월일을 입력해주세요.')
         }else if(password === ''){
             Alert.alert('비밀번호를 입력해주세요.')
         }else if(errorPasswordCheckMessage === false){
@@ -71,7 +62,8 @@ function SignupPage() {
         try{
             await firestore().collection('UserData').doc(uid).set({
                 email: registerEmail,
-                password: registerPassword,
+                name: name,
+                birth: birth,
             })
         }catch(error){
             console.error(error)
@@ -94,128 +86,168 @@ function SignupPage() {
         setErrorEmailMessage(validateEmail(changedEmail) ? '' : '이메일 형식으로 입력해 주세요.');
     }
 
-    // if (!user) {
-    //   return (
-    //     <View>
-    //       <Text>Login</Text>
-    //     </View>
-    //   );
-    // }
-  
+    useEffect(() => {
+        if(email !== '' && name !== '' && password !== '' && errorPasswordCheckMessage === true){
+            setChangeBtn(true)
+        }else{
+            setChangeBtn(false)
+        }
+    }, [email, name, password, errorPasswordCheckMessage])
+
     return (
-        <SafeAreaView>
-        <KeyboardAwareScrollView>
-
-            <View style={styles.signupBox}>
-                <View style={styles.warningText}>
-                    <Text style={styles.signupText}>이메일</Text>
-                    <Text style={{color: Colors.red, fontSize: 11,}}>{errorEmailMessage}</Text>
+        <KeyboardAwareScrollView style={{backgroundColor: Colors.white}}>
+        <SafeAreaView style={styles.block}>
+            <View style={styles.signupContainer}>
+            <Text style={styles.signupTitle}>회원가입</Text>
+            <View style={styles.inSignupContainer}>
+                <View style={styles.signupBox}>
+                    <View style={styles.warningText}>
+                        <Text style={styles.signupText}>이메일</Text>
+                        <Text style={{color: Colors.red, fontSize: 11, fontFamily: 'SUIT', fontWeight: 'bold',}}>{errorEmailMessage}</Text>
+                    </View>
+                    <TextInput
+                    placeholder="이메일을 입력해주세요."
+                    value={email}
+                    onChange={(e)=> setRegisterEmail(e.nativeEvent.text)}
+                    onChangeText={handleEmail}
+                    style={styles.signupInput}
+                    placeholderTextColor={Colors.gray}
+                    keyboardType= 'email-address'
+                    onSubmitEditing={() => {this.nameInput.focus()}}
+                    returnKeyType= 'next'
+                    />
                 </View>
-                <TextInput
-                  placeholder="이메일을 입력해주세요."
-                  value={email}
-                  onChange={(e)=> setRegisterEmail(e.nativeEvent.text)}
-                  onChangeText={handleEmail}
-                  style={styles.signupInput}
-                />
-            </View>
 
-            {/* <View style={styles.signupBox}>
-                <Text style={styles.signupText}>이름</Text>
-                <TextInput
-                  placeholder="이름을 입력해주세요."
-                  value={name}
-                  onChange={(e)=> setRegisterName(e.nativeEvent.text)}
-                  onChangeText={(text) => setName(removeWhitespace(text))}
-                  maxLength={10}
-                  style={styles.signupInput}
-                />
-            </View> */}
-
-            <View style={styles.signupBox}>
-                <Text style={styles.signupText}>비밀번호</Text>
-                <TextInput
-                  placeholder="비밀번호를 입력해주세요. (10자 이하)"
-                  value={password}
-                  secureTextEntry={true}
-                  onChange={(e)=> setRegisterPassword(e.nativeEvent.text)}
-                  onChangeText={(text) => setPassword(removeWhitespace(text))}
-                  maxLength={10}
-                  style={styles.signupInput}
-                />
-            </View>
-
-            <View style={styles.signupBox}>
-                <View style={styles.warningText}>
-                    <Text style={styles.signupText}>비밀번호 확인</Text>
-                    <Text style={{color: Colors.green, fontSize: 11,}}>{errorPasswordCheckMessage? '비밀번호가 일치합니다.': ''}</Text>
+                <View style={styles.signupBox}>
+                    <Text style={styles.signupText}>이름</Text>
+                    <TextInput
+                    placeholder="이름을 입력해주세요."
+                    value={name}
+                    onChangeText={(text) => setName(removeWhitespace(text))}
+                    maxLength={10}
+                    style={styles.signupInput}
+                    placeholderTextColor={Colors.gray}
+                    ref={(input) => {this.nameInput = input}}
+                    onSubmitEditing={() => {this.birthInput.focus()}}
+                    returnKeyType= 'next'
+                    />
                 </View>
-                <TextInput
-                  placeholder="비밀번호 확인"
-                  value={passwordMatch}
-                  secureTextEntry={true}
-                  onChangeText={passwordCheck}
-                  style={styles.signupInput}
-                />
-            </View>
 
-            <TouchableOpacity onPress={register} style={styles.signupBtn}>
-                <Text style={{textAlign: 'center', color: Colors.black}}>회원가입</Text>
-            </TouchableOpacity>
-            {/* <Text>Welcome {user.email}</Text> */}
-        </KeyboardAwareScrollView>
+                <View style={styles.signupBox}>
+                    <Text style={styles.signupText}>생년월일</Text>
+                    <TextInput
+                    placeholder="생년월일을 입력해주세요. (ex. 990101)"
+                    value={birth}
+                    onChangeText={(text) => setBirth(removeWhitespace(text))}
+                    maxLength={6}
+                    style={styles.signupInput}
+                    placeholderTextColor={Colors.gray}
+                    keyboardType= 'number-pad'
+                    ref={(input) => {this.birthInput = input}}
+                    onSubmitEditing={() => {this.passwordInput.focus()}}
+                    returnKeyType= 'next'
+                    />
+                </View>
+
+                <View style={styles.signupBox}>
+                    <Text style={styles.signupText}>비밀번호</Text>
+                    <TextInput
+                    placeholder="비밀번호를 입력해주세요. (6자 이상)"
+                    value={password}
+                    secureTextEntry={true}
+                    onChange={(e)=> setRegisterPassword(e.nativeEvent.text)}
+                    onChangeText={(text) => setPassword(removeWhitespace(text))}
+                    maxLength={10}
+                    style={styles.signupInput}
+                    placeholderTextColor={Colors.gray}
+                    ref={(input) => {this.passwordInput = input}}
+                    onSubmitEditing={() => {this.passwordcheckInput.focus()}}
+                    returnKeyType= 'next'
+                    />
+                </View>
+
+                <View style={styles.signupBox}>
+                    <View style={styles.warningText}>
+                        <Text style={styles.signupText}>비밀번호 확인</Text>
+                        <Text style={{color: Colors.green, fontSize: 11, fontFamily: 'SUIT', fontWeight: 'bold',}}>{errorPasswordCheckMessage? '비밀번호가 일치합니다.': ''}</Text>
+                    </View>
+                    <TextInput
+                    placeholder="비밀번호 확인"
+                    value={passwordMatch}
+                    secureTextEntry={true}
+                    onChangeText={passwordCheck}
+                    style={styles.signupInput}
+                    placeholderTextColor={Colors.gray}
+                    ref={(input) => {this.passwordcheckInput = input}}
+                    onSubmitEditing={register}
+                    returnKeyType= 'done'
+                    />
+                </View>
+
+                <TouchableOpacity onPress={register} style={[styles.signupBtn, {backgroundColor: changeBtn? Colors.bluepurple: Colors.darkgray}]}>
+                    <Text style={{textAlign: 'center', color: Colors.black, fontFamily: 'SUIT', fontWeight: 'bold',}}>회원가입</Text>
+                </TouchableOpacity>
+            </View>
+            </View>
         </SafeAreaView>
+        </KeyboardAwareScrollView>
     );
 }
 export default SignupPage
 
 const styles = StyleSheet.create({
     block: {
-      flex: 1,
-      backgroundColor: Colors.white,
-      alignItems: 'center',
+        flex: 1,
+        backgroundColor: Colors.white,
+    },
+    signupTitle: {
+        fontFamily: 'SUIT',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 30,
+        color: Colors.black,
     },
     signupContainer: {
-        position: 'absolute',
+        position: 'relative',
         gap: 10,
+        width: '100%',
+        marginTop: 100,
+    },
+    inSignupContainer: {
         width: '90%',
-        top: '10%',
-        // height: 600,
+        marginLeft: 'auto', marginRight: 'auto',
         padding: 20,
-        borderWidth: 1,
-        borderRadius: 5,
+        gap: 20,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
     },
     signupBox: {
-        gap: 5,
+        
     },
     warningText: {
         flexDirection: 'row',
         gap: 10,
         alignItems: 'center',
     },
-    idCheck: {
-        position: 'absolute',
-        height: '100%',
-        borderTopRightRadius: 5,
-        borderBottomRightRadius: 5,
-        borderWidth: 1,
-        right: 0,
-        padding: 3,
-        backgroundColor: Colors.gray,
-    },
     signupText: {
+        fontFamily: 'SUIT',
+        fontWeight: 'bold',
         color: Colors.black,
         marginLeft: 5,
-        marginTop: 10,
+        fontSize: 15,
     },
     signupInput: {
-        borderWidth: 1,
-        borderRadius: 5,
+        borderBottomWidth: .5,
+        borderBottomColor: Colors.darkgray,
         paddingLeft: 5,
+        fontFamily: 'SUIT',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
     signupBtn: {
         padding: 10,
-        borderWidth: 1,
-        marginTop: 10,
+        // borderWidth: 1,
+        borderRadius: 5,
+        marginTop: 10,        
     },
 });
