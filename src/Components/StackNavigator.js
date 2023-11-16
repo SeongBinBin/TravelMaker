@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import KakaoMap from './Map/KakaoMap';
 import TabNavigator from './TabNavigator';
@@ -24,6 +25,7 @@ function StackNavigator(){
   const [ records, setRecords ] = useState([])
   const [ loading, setLoading ] = useState(true)
   const [ createdAt, setCreatedAt ] = useState([])
+  const [isLoggedin, setIsLoggedin] = useState(false)
 
   useEffect(() => {
     function onResult(querySnapshot){
@@ -50,6 +52,20 @@ function StackNavigator(){
       console.error(`${error} occured when reading records`)
     }
 
+    const getLocalEmail = async() => {  // 로컬로 저장돼있는 값 저장
+      try{
+        const userEmail = await AsyncStorage.getItem('loggedInEmail')
+        if(userEmail !== null){
+          setIsLoggedin(true)
+        }else{
+          setIsLoggedin(false)
+        }
+      }catch(error){
+        console.error(error)
+      }
+    }
+    getLocalEmail()
+
     return getCollection('Records',
                           onResult, onError,
                           null,
@@ -70,7 +86,7 @@ function StackNavigator(){
 
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName = "Landing" screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName = {isLoggedin? "Main": "Landing"} screenOptions={{headerShown: false}}>
         <Stack.Screen name="Main"
           component={TabNavigator}
           initialParams={{records, createdAt}}
