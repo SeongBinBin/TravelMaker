@@ -57,8 +57,7 @@ function KakaoMap({ route }) {
             regionValue: receiveRegionValue.current,
             dongValue: receiveDongValue.current,
             calendar: route.params.calendar,
-            isCalendar: route.params.calendar === undefined? false : true
-
+            isCalendar: route.params.calendar === undefined? false : true,
         })
     }
 

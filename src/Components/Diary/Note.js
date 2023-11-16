@@ -41,6 +41,7 @@ function Note({ route, navigation, records }){
 
   useEffect(() => {
 
+    console.log(route.params)
     if(route.params !== undefined && route.params.page === 'Map'){
       fromMap(route.params);
 
@@ -62,21 +63,13 @@ function Note({ route, navigation, records }){
     setSelectedYear(data.selectedYear)
     setSelectedMonth(data.selectedMonth)
     setSelectedDate(data.selectedDate)
+    if(route.params.page === 'Calendar' && data.selectedId !== '') setNoteContents(data.selectedId)
+    else {
+      setTitle(data.title)
+      setContents(data.contents)
+    }
     setIsEdit(data.isEdit)
-    setSelectedId(data.selectedId)
-
     checkIsToday(data);
-    
-    setNoteContents(data.selectedId);
-
-  }
-
-  const checkIsToday = (data) => {
-    if(today === `${data.selectedYear}-${data.selectedMonth}-${data.selectedDate}` 
-      || today === `${data.selectedYear}-${data.selectedMonth}-0${data.selectedDate}`){
-        setIsToday(true)
-      }
-    else setIsToday(false)
   }
 
   const setNoteContents = (id) => {
@@ -86,6 +79,14 @@ function Note({ route, navigation, records }){
         setContents(record.contents)
       }
     })
+  }
+
+  const checkIsToday = (data) => {
+    if(today === `${data.selectedYear}-${data.selectedMonth}-${data.selectedDate}` 
+      || today === `${data.selectedYear}-${data.selectedMonth}-0${data.selectedDate}`){
+        setIsToday(true)
+      }
+    else setIsToday(false)
   }
 
   const insertRecord = async () => {
@@ -117,7 +118,7 @@ function Note({ route, navigation, records }){
 
   const editData = async (user) => {
 
-    if(isEditPlace){
+    if(route.params.isCalendar){
       await updateData(`UserData/${user.uid}/MapData`, route.params.selectedId, {
         latitude,
         longitude,
@@ -148,12 +149,15 @@ function Note({ route, navigation, records }){
   const moveToback = () => {
     setTitle('')
     setContents('')
+    setSelectedId('')
 
-    if(route.params.page === "Calendar"){
+    if(route.params.page === "Calendar" || route.params.isCalendar){
 
       navigation.navigate("Main", {
-        screen: `${route.params.page}`,
+        screen: "Calendar",
       })
+
+      return;
     }
 
     if(route.params.page === "Map"){
@@ -165,19 +169,22 @@ function Note({ route, navigation, records }){
         longitude: longitude,
       })
 
+      return;
     }
 
-    return;
   }
 
   const moveToMap = () => {
+
     navigation.navigate('Main', {
       screen: 'Home',
       params: {
         selectedYear,
         selectedMonth,
         selectedDate,
-        selectedId,
+        selectedId: route.params.selectedId,
+        title,
+        contents,
         isEdit
       }
     
