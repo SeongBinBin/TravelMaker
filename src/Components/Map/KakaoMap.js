@@ -16,6 +16,7 @@ function KakaoMap({ route }) {
     const receiveCityValue = useRef(null);
     const receiveRegionValue = useRef(null);
     const receiveDongValue = useRef(null);
+    const receiveRegionFullName = useRef(null);
     const userUID = useRef(null)
 
     useEffect(() => {
@@ -26,7 +27,7 @@ function KakaoMap({ route }) {
     })
 
     const sendMessage = () => {
-        const data = {
+        const data = {          // RN -> 리액트
             city: selectedCity,
             region: regionName,
             latitude: latitudeRef,
@@ -41,12 +42,14 @@ function KakaoMap({ route }) {
         const cityValue = data.cityValue;           // 리액트에서 전달받은 지역값
         const regionValue = data.regionValue;       // 리액트에서 전달받은 구역값
         const dongValue = data.dongValue;           // 리액트에서 전달받은 동이름
+        const regionFullName = data.regionFullName; // 리액트에서 전달받은 지역 정보 전체 정보
 
         receiveLatitude.current = clickLatLng.Ma
         receiveLongitude.current = clickLatLng.La
         receiveCityValue.current = cityValue
         receiveRegionValue.current = regionValue
         receiveDongValue.current = dongValue
+        receiveRegionFullName.current = regionFullName
 
         // console.log('위도 : ' + data.Ma + ' / ' + '경도 : ' + data.La)
         navigation.navigate('Note', {
@@ -56,6 +59,7 @@ function KakaoMap({ route }) {
             cityValue: receiveCityValue.current,
             regionValue: receiveRegionValue.current,
             dongValue: receiveDongValue.current,
+            regionFullName: receiveRegionFullName.current,
             calendar: route.params.calendar,
             isCalendar: route.params.calendar === undefined? false : true,
         })
@@ -65,8 +69,8 @@ function KakaoMap({ route }) {
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-            //   source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
-              source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
+              source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
+            //   source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
             onLoad={() => sendMessage()}
         />
     )
