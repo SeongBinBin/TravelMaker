@@ -97,15 +97,15 @@ function StackNavigator(){
         <Stack.Screen name="Main"
           component={TabNavigator}
           initialParams={{records, createdAt}}
-          options={{headerShown: false}}/>
-        <Stack.Screen name="Map" component={KakaoMap} options={{headerShown: false}}/>
-        <Stack.Screen name="KoreaMap" component={KoreaMap} options={{headerShown: false}}/>
-        <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}} options={{headerShown: false}}/>
-        <Stack.Screen name="Calendar" component={Calendar} options={{headerShown: false}}/>
-        <Stack.Screen name="Landing" component={LandingPage} options={{headerShown: false}}/>
-        <Stack.Screen name="Login" component={LoginPage} options={{headerShown: false}}/>
-        <Stack.Screen name="Signup" component={SignupPage} options={{headerShown: false}}/>
-        <Stack.Screen name="IDPWSearch" component={IDPWSearchPage} options={{headerShown: false}}/>
+        />
+        <Stack.Screen name="Map" component={KakaoMap}/>
+        <Stack.Screen name="KoreaMap" component={KoreaMap}/>
+        <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}}/>
+        <Stack.Screen name="Calendar" component={Calendar}/>
+        <Stack.Screen name="Landing" component={LandingPage}/>
+        <Stack.Screen name="Login" component={LoginPage}/>
+        <Stack.Screen name="Signup" component={SignupPage}/>
+        <Stack.Screen name="IDPWSearch" component={IDPWSearchPage}/>
         <Stack.Screen name="Note"
           children={(props) => 
             <Note {...props} records={records}/>

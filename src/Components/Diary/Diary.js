@@ -11,20 +11,22 @@ function Diary({
   selectedYear, selectedMonth, selectedDate,
   setSelectedId,
   setDeleteModal,
-  navigation
+  navigation,
 }){
 
   const moveToNote = (isEdit, selectedId) => {
     navigation.navigate('Note', {
       page: 'Calendar',
-      selectedYear,
-      selectedMonth,
-      selectedDate,
-      selectedId,
-      isEdit
+      calendar: {
+        selectedYear,
+        selectedMonth,
+        selectedDate,
+        selectedId,
+        isEdit,
+        records
+      },
     })
   }
-
 
   return (
     <View style={diaryStyles.diaryContainer}>

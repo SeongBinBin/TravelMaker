@@ -30,7 +30,7 @@ function Note({ route, navigation, records }){
 
   const [ title, setTitle ] = useState('')
   const [ contents, setContents ] = useState('')
-  const [ place, setPlace ] = useState('')
+  const [ placeName, setPlaceName ] = useState('')
 
   const [ isCalendar, setIsCalendar ] = useState(false)
 
@@ -45,13 +45,12 @@ function Note({ route, navigation, records }){
 
   useEffect(() => {
 
-    // console.log(route.params)
     if(route.params !== undefined && route.params.page === 'Map'){
       fromMap(route.params);
 
       if(route.params.isCalendar) fromCalendar(route.params.calendar)
     } 
-    if(route.params !== undefined && route.params.page === 'Calendar') fromCalendar(route.params);
+    if(route.params !== undefined && route.params.page === 'Calendar') fromCalendar(route.params.calendar);
     
   }, [route])
 
@@ -64,7 +63,6 @@ function Note({ route, navigation, records }){
   }
 
   const fromCalendar = (data) => {
-
     setSelectedYear(data.selectedYear)
     setSelectedMonth(data.selectedMonth)
     setSelectedDate(data.selectedDate)
@@ -84,8 +82,8 @@ function Note({ route, navigation, records }){
         setLongitude(record.longitude)
         setTitle(record.title)
         setContents(record.contents)
-        setPlace(record.cityValue)
-        setGetFullName(record.regionFullName)
+        setCityValue(record.cityValue)
+        setRegionFullName(record.regionFullName)
       }
     })
   }
@@ -117,7 +115,7 @@ function Note({ route, navigation, records }){
         longitude,
         cityValue,
         regionValue,
-        regionFullName,
+        regionFullName: placeName === ''? regionFullName : placeName,
       }
 
       await addData(`UserData/${user.uid}/MapData`, newRecord)
@@ -163,11 +161,21 @@ function Note({ route, navigation, records }){
     setTitle('')
     setContents('')
     setSelectedId('')
+    setSelectedYear(today.year)
+    setSelectedMonth(today.month)
+    setSelectedDate(today.date)
 
     if(route.params.page === "Calendar" || route.params.isCalendar){
 
       navigation.navigate("Main", {
         screen: "Calendar",
+        params: {
+          selectedYear: today.year,
+          selectedMonth: today.month,
+          selectedDate: today.date,
+          selectedId: '',
+          isEdit: false
+        }
       })
 
       return;
@@ -195,7 +203,7 @@ function Note({ route, navigation, records }){
         selectedYear,
         selectedMonth,
         selectedDate,
-        selectedId: route.params.selectedId,
+        selectedId: route.params.calendar.selectedId,
         title,
         contents,
         isEdit
@@ -261,11 +269,11 @@ function Note({ route, navigation, records }){
                 />
               </TouchableWithoutFeedback>
               <View>
-                {/* <TextInput
-                  placeholder="장소를 입력해주세요"
+                <TextInput
+                  placeholder={regionFullName === '' || regionFullName === undefined? "장소를 입력해주세요" : regionFullName}
                   style={noteStyles.addPlaceText}
-                />                 */}
-                <Text style={noteStyles.addPlaceText}>{getFullName}</Text>
+                  onChangeText={(text) => setPlaceName(text)}
+                />                
               </View>
             </View>
 

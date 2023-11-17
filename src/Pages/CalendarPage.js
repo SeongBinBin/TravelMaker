@@ -11,7 +11,7 @@ import Note from '../Components/Diary/Note'
 import { calendarStyles } from '../Styles/CalendarPageStyle'
 
 
-function CalendarScreen({ records, createdAt, navigation }){
+function CalendarScreen({ records, createdAt, navigation, route }){
 
   const today = getFullCalendar(new Date())
   
@@ -24,6 +24,16 @@ function CalendarScreen({ records, createdAt, navigation }){
   const [ selectedId, setSelectedId ] = useState('')
 
 
+  // useEffect(() => {
+
+  //   if(route.params !== undefined){
+  //     setSelectedYear(route.params.selectedYear)
+  //     setSelectedMonth(route.params.selectedMonth)
+  //     setSelectedDate(route.params.selectedDate)
+  //     setSelectedId(route.params.selectedId)
+  //   }
+
+  // }, [route])
 
   useEffect(() => {
     if(today.date < 10){
