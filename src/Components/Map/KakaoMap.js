@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { WebView, View, Text } from 'react-native-webview';
-import { TabRouter, useNavigation } from "@react-navigation/native";
+import { WebView, View, Text, SafeAreaView } from 'react-native-webview';
+import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth';
 
 function KakaoMap({ route }) {
@@ -66,13 +66,15 @@ function KakaoMap({ route }) {
     }
 
     return (
+        <>
         <WebView
             ref={webViewRef}
             onMessage={receiveData}
-              source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
-            //   source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
+            //   source={{ uri: 'http://192.168.200.14:3000/RN_Map' }}
+              source={{ uri: 'https://seongbinbin.github.io/RN_Map' }}
             onLoad={() => sendMessage()}
         />
+        </>
     )
 }
 

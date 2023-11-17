@@ -12,10 +12,10 @@ import firestore from '@react-native-firebase/firestore'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { noteStyles } from "../../Styles/NoteStyle";
 import addPlace from '../../Assets/Imgs/addPlace.png'
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useIsFocused } from "@react-navigation/native";
 
 function Note({ route, navigation, records }){
-
+  const isFocused = useIsFocused()
   const today = getFullCalendar(new Date())
   
   const [ selectedYear, setSelectedYear ] = useState(today.year)
@@ -40,20 +40,18 @@ function Note({ route, navigation, records }){
   const [ regionValue, setRegionValue ] = useState('')
   const [ regionFullName, setRegionFullName] = useState('')
   const [ getFullName, setGetFullName ] = useState('')
-  const [ changeLatitude, setChangeLatitude ] = useState('')
-  const [ changeLongitude, setChangeLongitude ] = useState('')
 
   useEffect(() => {
-    const user = auth().currentUser
+    if(isFocused){
+      // console.log(route.params)
+      if(route.params !== undefined && route.params.page === 'Map'){
+        fromMap(route.params);
 
-    if(route.params !== undefined && route.params.page === 'Map'){
-      fromMap(route.params);
-
-      if(route.params.isCalendar) fromCalendar(route.params.calendar)
-    } 
-    if(route.params !== undefined && route.params.page === 'Calendar') fromCalendar(route.params.calendar);
-    
-  }, [route])
+        if(route.params.isCalendar) fromCalendar(route.params.calendar)
+      } 
+      if(route.params !== undefined && route.params.page === 'Calendar') fromCalendar(route.params.calendar);
+    }
+  }, [isFocused, route])
 
   const fromMap = (data) => {
     setLatitude(data.latitude)
@@ -186,7 +184,7 @@ function Note({ route, navigation, records }){
 
     if(route.params.page === "Map"){
 
-      navigation.navigate("Map", {
+      navigation.navigate("Main", {
         city: cityValue,
         region: regionValue,
         latitude: latitude,
@@ -259,10 +257,6 @@ function Note({ route, navigation, records }){
                   onChangeText={(text) => setContents(text)}
                   value={contents}
                 />
-                <Text>기존위도 : {latitude}</Text>
-                <Text>기존경도 : {longitude}</Text>
-                <Text>변경위도 : {changeLatitude}</Text>
-                <Text>변경경도 : {changeLongitude}</Text>
               </View>
             </View>
           </View>

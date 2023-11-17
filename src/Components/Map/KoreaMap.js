@@ -8,6 +8,7 @@ import auth from '@react-native-firebase/auth';
 
 import Region from '../../Assets/Json/Region.json';
 import Colors from "../../Styles/Colors";
+import { useIsFocused } from '@react-navigation/native';
 
 function KoreaMap({ route }) {
     const navigation = useNavigation();
@@ -17,6 +18,7 @@ function KoreaMap({ route }) {
     const regionName = useRef(null);
     const latitudeRef = useRef(null);
     const longitudeRef = useRef(null);
+    const isFocused = useIsFocused()
 
     const handlePathClick = (className) => {
         setSelectedCity(className)
@@ -48,6 +50,7 @@ function KoreaMap({ route }) {
     }
     
     useEffect(() => {
+        if(isFocused){
         const currentUser = auth().currentUser
     
         const getRegion = (querySnapshot) => {
@@ -66,7 +69,8 @@ function KoreaMap({ route }) {
             const userUID = currentUser.uid            
             getCollection(`UserData/${userUID}/MapData`, getRegion)
         }
-    }, [])
+    }
+    }, [isFocused])
 
     const checkClicked = () => {
         if (selectedCity === null) {

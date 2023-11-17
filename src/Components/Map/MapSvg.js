@@ -3,6 +3,8 @@ import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, Alert } from "r
 import Svg, { Path } from 'react-native-svg';
 import { getCollection } from "../../apis/firebase";
 import auth from '@react-native-firebase/auth';
+import { useIsFocused } from "@react-navigation/native";
+
 
 function MapSvg(props) {
     const [basicColor, setBasicColor] = useState('#ccc')
@@ -11,6 +13,7 @@ function MapSvg(props) {
     const [transform, setTransform] = useState('scale(.2797)')
     const [getCityData, setGetCityData] = useState([])
     const [skyblue, setSkyblue] = useState('#89CEEB')
+    const isFocused = useIsFocused()
 
     const handlePathClick = (className) => {
         props.onPathClick(className)
@@ -45,22 +48,24 @@ function MapSvg(props) {
     // }, [])
 
     useEffect(() => {
-        const currentUser = auth().currentUser
+        if(isFocused){
+            const currentUser = auth().currentUser
 
-        const getCity = (querySnapshot) => {
-            const CityData = []
-            querySnapshot.forEach((doc) => {
-                const data = doc.data()
-                CityData.push(data.cityValue)
-            })
-            setGetCityData(CityData)
-        }
+            const getCity = (querySnapshot) => {
+                const CityData = []
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data()
+                    CityData.push(data.cityValue)
+                })
+                setGetCityData(CityData)
+            }
 
-        if(currentUser){
-            const userUID = currentUser.uid
-            getCollection(`UserData/${userUID}/MapData`, getCity)
+            if(currentUser){
+                const userUID = currentUser.uid
+                getCollection(`UserData/${userUID}/MapData`, getCity)
+            }
         }
-    }, [])
+    }, [isFocused])
 
     return (
         <SafeAreaView>

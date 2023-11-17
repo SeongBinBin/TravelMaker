@@ -1,133 +1,314 @@
 {
     "region": [
         {
-            "세종특별자치시": [
+            "서울특별시": [
                 {
-                    "name": "세종특별자치시",
-                    "latitude": "36.4803512",
-                    "longitude": "127.2894325"
+                    "name": "강남구",
+                    "latitude": "37.51714450539797",
+                    "longitude": "127.0474066999196"
                 },
                 {
-                    "name": "조치원읍",
-                    "latitude": "36.6045664",
-                    "longitude": "127.2984279"
+                    "name": "강동구",
+                    "latitude": "37.530126",
+                    "longitude": "127.1237708"
+                },
+                {
+                    "name": "강북구",
+                    "latitude": "37.6397819",
+                    "longitude": "127.0256135"
+                },
+                {
+                    "name": "강서구",
+                    "latitude": "37.550937",
+                    "longitude": "126.849642"
+                },
+                {
+                    "name": "관악구",
+                    "latitude": "37.4781549",
+                    "longitude": "126.9514847"
+                },
+                {
+                    "name": "광진구",
+                    "latitude": "37.538617",
+                    "longitude": "127.082375"
+                },
+                {
+                    "name": "구로구",
+                    "latitude": "37.495472",
+                    "longitude": "126.887536"
+                },
+                {
+                    "name": "금천구",
+                    "latitude": "37.4568644",
+                    "longitude": "126.8955105"
+                },
+                {
+                    "name": "노원구",
+                    "latitude": "37.654358",
+                    "longitude": "127.056473"
+                },
+                {
+                    "name": "도봉구",
+                    "latitude": "37.668768",
+                    "longitude": "127.047163"
+                },
+                {
+                    "name": "동대문구",
+                    "latitude": "37.574524",
+                    "longitude": "127.03965"
+                },
+                {
+                    "name": "동작구",
+                    "latitude": "37.51245",
+                    "longitude": "126.9395"
+                },
+                {
+                    "name": "마포구",
+                    "latitude": "37.5663245",
+                    "longitude": "126.901491"
+                },
+                {
+                    "name": "서대문구",
+                    "latitude": "37.579225",
+                    "longitude": "126.9368"
+                },
+                {
+                    "name": "서초구",
+                    "latitude": "37.483569",
+                    "longitude": "127.032598"
+                },
+                {
+                    "name": "성동구",
+                    "latitude": "37.563456",
+                    "longitude": "127.036821"
+                },
+                {
+                    "name": "성북구",
+                    "latitude": "37.5894",
+                    "longitude": "127.016749"
+                },
+                {
+                    "name": "송파구",
+                    "latitude": "37.5145636",
+                    "longitude": "127.1059186"
+                },
+                {
+                    "name": "양천구",
+                    "latitude": "37.517016",
+                    "longitude": "126.866642"
+                },
+                {
+                    "name": "영등포구",
+                    "latitude": "37.526436",
+                    "longitude": "126.896004"
+                },
+                {
+                    "name": "용산구",
+                    "latitude": "37.532527",
+                    "longitude": "126.99049"
+                },
+                {
+                    "name": "은평구",
+                    "latitude": "37.602784",
+                    "longitude": "126.929164"
+                },
+                {
+                    "name": "종로구",
+                    "latitude": "37.5735207",
+                    "longitude": "126.9788345"
+                },
+                {
+                    "name": "중구",
+                    "latitude": "37.563843",
+                    "longitude": "126.997602"
+                },
+                {
+                    "name": "중랑구",
+                    "latitude": "37.6063242",
+                    "longitude": "127.0925842"
                 }
             ],
-            "경상북도": [
+            "광주광역시": [
                 {
-                    "name": "경산시",
-                    "latitude": "35.82509",
-                    "longitude": "128.741201"
+                    "name": "광산구",
+                    "latitude": "35.1395085",
+                    "longitude": "126.7936834"
                 },
                 {
-                    "name": "경주시",
-                    "latitude": "35.856242",
-                    "longitude": "129.224784"
+                    "name": "남구",
+                    "latitude": "35.1330039",
+                    "longitude": "126.902402"
                 },
                 {
-                    "name": "고령군",
-                    "latitude": "35.725968",
-                    "longitude": "128.262688"
+                    "name": "동구",
+                    "latitude": "35.1460818",
+                    "longitude": "126.9232859"
                 },
                 {
-                    "name": "구미시",
-                    "latitude": "36.1195987",
-                    "longitude": "128.3443"
+                    "name": "북구",
+                    "latitude": "35.17406",
+                    "longitude": "126.911963"
                 },
                 {
-                    "name": "김천시",
-                    "latitude": "36.1397714",
-                    "longitude": "128.1136148"
+                    "name": "서구",
+                    "latitude": "35.151969",
+                    "longitude": "126.890272"
+                }
+            ],
+            "대구광역시": [
+                {
+                    "name": "남구",
+                    "latitude": "35.846",
+                    "longitude": "128.597486"
                 },
                 {
-                    "name": "문경시",
-                    "latitude": "36.586522",
-                    "longitude": "128.186787"
+                    "name": "달서구",
+                    "latitude": "35.8298667",
+                    "longitude": "128.5327375"
                 },
                 {
-                    "name": "봉화군",
-                    "latitude": "36.893114",
-                    "longitude": "128.732503"
+                    "name": "동구",
+                    "latitude": "35.886664",
+                    "longitude": "128.635609"
                 },
                 {
-                    "name": "상주시",
-                    "latitude": "36.411002",
-                    "longitude": "128.159229"
+                    "name": "북구",
+                    "latitude": "35.885684",
+                    "longitude": "128.582947"
                 },
                 {
-                    "name": "성주군",
-                    "latitude": "35.919175",
-                    "longitude": "128.282959"
+                    "name": "서구",
+                    "latitude": "35.871757",
+                    "longitude": "128.559175"
                 },
                 {
-                    "name": "안동시",
-                    "latitude": "36.568425",
-                    "longitude": "128.7295375"
+                    "name": "수성구",
+                    "latitude": "35.8581654",
+                    "longitude": "128.630625"
                 },
                 {
-                    "name": "영덕군",
-                    "latitude": "36.415034",
-                    "longitude": "129.365267"
+                    "name": "중구",
+                    "latitude": "35.8693404",
+                    "longitude": "128.6062"
                 },
                 {
-                    "name": "영양군",
-                    "latitude": "36.6667174",
-                    "longitude": "129.1123839"
+                    "name": "군위군",
+                    "latitude": "36.242945",
+                    "longitude": "128.572657"
                 },
                 {
-                    "name": "영주시",
-                    "latitude": "36.805667",
-                    "longitude": "128.624063"
+                    "name": "달성군",
+                    "latitude": "35.7746",
+                    "longitude": "128.431445"
+                }
+            ],
+            "대전광역시": [
+                {
+                    "name": "대덕구",
+                    "latitude": "36.346735",
+                    "longitude": "127.415502"
                 },
                 {
-                    "name": "영천시",
-                    "latitude": "35.97326",
-                    "longitude": "128.938613"
+                    "name": "동구",
+                    "latitude": "36.312169",
+                    "longitude": "127.454884"
                 },
                 {
-                    "name": "예천군",
-                    "latitude": "36.6468844",
-                    "longitude": "128.4373552"
+                    "name": "서구",
+                    "latitude": "36.355504",
+                    "longitude": "127.383844"
                 },
                 {
-                    "name": "울릉군",
-                    "latitude": "37.484455",
-                    "longitude": "130.905697"
+                    "name": "유성구",
+                    "latitude": "36.3623219",
+                    "longitude": "127.3562683"
                 },
                 {
-                    "name": "울진군",
-                    "latitude": "36.993087",
-                    "longitude": "129.400394"
+                    "name": "중구",
+                    "latitude": "36.3256594",
+                    "longitude": "127.4215464"
+                }
+            ],
+            "부산광역시": [
+                {
+                    "name": "강서구",
+                    "latitude": "35.2122179",
+                    "longitude": "128.98045"
                 },
                 {
-                    "name": "의성군",
-                    "latitude": "36.3527158",
-                    "longitude": "128.6971711"
+                    "name": "금정구",
+                    "latitude": "35.243068",
+                    "longitude": "129.0921"
                 },
                 {
-                    "name": "청도군",
-                    "latitude": "35.647399",
-                    "longitude": "128.733988"
+                    "name": "남구",
+                    "latitude": "35.136577",
+                    "longitude": "129.084163"
                 },
                 {
-                    "name": "청송군",
-                    "latitude": "36.4362793",
-                    "longitude": "129.0571263"
+                    "name": "동구",
+                    "latitude": "35.1292746",
+                    "longitude": "129.0453253"
                 },
                 {
-                    "name": "칠곡군",
-                    "latitude": "35.9955753",
-                    "longitude": "128.401679"
+                    "name": "동래구",
+                    "latitude": "35.1964382",
+                    "longitude": "129.0938569"
                 },
                 {
-                    "name": "포항시",
-                    "latitude": "36.0190333",
-                    "longitude": "129.3433898"
+                    "name": "부산진구",
+                    "latitude": "35.162913",
+                    "longitude": "129.053157"
                 },
                 {
-                    "name": "독도",
-                    "latitude": "37.240255",
-                    "longitude": "131.866844"
+                    "name": "북구",
+                    "latitude": "35.197185",
+                    "longitude": "128.990438"
+                },
+                {
+                    "name": "사상구",
+                    "latitude": "35.152624",
+                    "longitude": "128.99125"
+                },
+                {
+                    "name": "사하구",
+                    "latitude": "35.104585",
+                    "longitude": "128.974817"
+                },
+                {
+                    "name": "서구",
+                    "latitude": "35.0979321",
+                    "longitude": "129.0244125"
+                },
+                {
+                    "name": "수영구",
+                    "latitude": "35.145694",
+                    "longitude": "129.113186"
+                },
+                {
+                    "name": "연제구",
+                    "latitude": "35.176242",
+                    "longitude": "129.079764"
+                },
+                {
+                    "name": "영도구",
+                    "latitude": "35.091199",
+                    "longitude": "129.067875"
+                },
+                {
+                    "name": "중구",
+                    "latitude": "35.106214",
+                    "longitude": "129.032352"
+                },
+                {
+                    "name": "해운대구",
+                    "latitude": "35.163177",
+                    "longitude": "129.163634"
+                },
+                {
+                    "name": "기장군",
+                    "latitude": "35.244498",
+                    "longitude": "129.222312"
                 }
             ],
             "울산광역시": [
@@ -157,76 +338,172 @@
                     "longitude": "129.2422295"
                 }
             ],
-            "전라북도": [
+            "인천광역시": [
                 {
-                    "name": "고창군",
-                    "latitude": "35.435836",
-                    "longitude": "126.701973"
+                    "name": "계양구",
+                    "latitude": "37.5374147",
+                    "longitude": "126.7377757"
                 },
                 {
-                    "name": "군산시",
-                    "latitude": "35.9676263",
-                    "longitude": "126.736875"
+                    "name": "남동구",
+                    "latitude": "37.447342",
+                    "longitude": "126.731488"
                 },
                 {
-                    "name": "김제시",
-                    "latitude": "35.8035917",
-                    "longitude": "126.8808375"
+                    "name": "동구",
+                    "latitude": "37.4738846",
+                    "longitude": "126.6432125"
                 },
                 {
-                    "name": "남원시",
-                    "latitude": "35.416432",
-                    "longitude": "127.390438"
+                    "name": "미추홀구",
+                    "latitude": "37.4635229",
+                    "longitude": "126.6505841"
                 },
                 {
-                    "name": "무주군",
-                    "latitude": "36.00681",
-                    "longitude": "127.660818"
+                    "name": "부평구",
+                    "latitude": "37.5070563",
+                    "longitude": "126.7218378"
                 },
                 {
-                    "name": "부안군",
-                    "latitude": "35.731755",
-                    "longitude": "126.733199"
+                    "name": "서구",
+                    "latitude": "37.545449",
+                    "longitude": "126.675994"
                 },
                 {
-                    "name": "순창군",
-                    "latitude": "35.374476",
-                    "longitude": "127.137489"
+                    "name": "연수구",
+                    "latitude": "37.4101675",
+                    "longitude": "126.67828"
                 },
                 {
-                    "name": "완주군",
-                    "latitude": "35.904708",
-                    "longitude": "127.162019"
+                    "name": "중구",
+                    "latitude": "37.473781",
+                    "longitude": "126.621588"
                 },
                 {
-                    "name": "익산시",
-                    "latitude": "35.948295",
-                    "longitude": "126.957786"
+                    "name": "강화군",
+                    "latitude": "37.746498",
+                    "longitude": "126.488052"
                 },
                 {
-                    "name": "임실군",
-                    "latitude": "35.6178286",
-                    "longitude": "127.2890774"
+                    "name": "옹진군",
+                    "latitude": "37.446607",
+                    "longitude": "126.63676"
+                }
+            ],
+            "제주특별자치도": [
+                {
+                    "name": "서귀포시",
+                    "latitude": "33.253925",
+                    "longitude": "126.5597875"
                 },
                 {
-                    "name": "장수군",
-                    "latitude": "35.647366",
-                    "longitude": "127.5215208"
+                    "name": "제주시",
+                    "latitude": "33.499568",
+                    "longitude": "126.531138"
+                }
+            ],
+            "세종특별자치시": [
+                {
+                    "name": "세종특별자치시",
+                    "latitude": "36.4803512",
+                    "longitude": "127.2894325"
                 },
                 {
-                    "name": "전주시",
-                    "latitude": "35.824171",
-                    "longitude": "127.14805"
+                    "name": "조치원읍",
+                    "latitude": "36.6045664",
+                    "longitude": "127.2984279"
+                }
+            ],
+            "강원특별자치도": [
+                {
+                    "name": "강릉시",
+                    "latitude": "37.752175",
+                    "longitude": "128.875836"
                 },
                 {
-                    "name": "정읍시",
-                    "latitude": "35.569867",
-                    "longitude": "126.856038"
+                    "name": "고성군",
+                    "latitude": "38.3806154",
+                    "longitude": "128.4678625"
                 },
                 {
-                    "name": "진안군",
-                    "latitude": "35.7917621",
-                    "longitude": "127.424875"
+                    "name": "동해시",
+                    "latitude": "37.5247583",
+                    "longitude": "129.1142625"
+                },
+                {
+                    "name": "삼척시",
+                    "latitude": "37.4499354",
+                    "longitude": "129.1651479"
+                },
+                {
+                    "name": "속초시",
+                    "latitude": "38.207169",
+                    "longitude": "128.59184"
+                },
+                {
+                    "name": "양구군",
+                    "latitude": "38.109992",
+                    "longitude": "127.99"
+                },
+                {
+                    "name": "양양군",
+                    "latitude": "38.075493",
+                    "longitude": "128.619145"
+                },
+                {
+                    "name": "영월군",
+                    "latitude": "37.183774",
+                    "longitude": "128.46185"
+                },
+                {
+                    "name": "원주시",
+                    "latitude": "37.3423179",
+                    "longitude": "127.9199688"
+                },
+                {
+                    "name": "인제군",
+                    "latitude": "38.069732",
+                    "longitude": "128.170352"
+                },
+                {
+                    "name": "정선군",
+                    "latitude": "37.380609",
+                    "longitude": "128.660871"
+                },
+                {
+                    "name": "철원군",
+                    "latitude": "38.146861",
+                    "longitude": "127.313472"
+                },
+                {
+                    "name": "춘천시",
+                    "latitude": "37.8813739",
+                    "longitude": "127.7300034"
+                },
+                {
+                    "name": "태백시",
+                    "latitude": "37.164132",
+                    "longitude": "128.985735"
+                },
+                {
+                    "name": "평창군",
+                    "latitude": "37.37077",
+                    "longitude": "128.390193"
+                },
+                {
+                    "name": "홍천군",
+                    "latitude": "37.697207",
+                    "longitude": "127.888518"
+                },
+                {
+                    "name": "화천군",
+                    "latitude": "38.106181",
+                    "longitude": "127.708216"
+                },
+                {
+                    "name": "횡성군",
+                    "latitude": "37.491803",
+                    "longitude": "127.985022"
                 }
             ],
             "경기도": [
@@ -386,411 +663,203 @@
                     "longitude": "126.831405"
                 }
             ],
-            "광주광역시": [
+            "경상남도": [
                 {
-                    "name": "광산구",
-                    "latitude": "35.1395085",
-                    "longitude": "126.7936834"
-                },
-                {
-                    "name": "남구",
-                    "latitude": "35.1330039",
-                    "longitude": "126.902402"
-                },
-                {
-                    "name": "동구",
-                    "latitude": "35.1460818",
-                    "longitude": "126.9232859"
-                },
-                {
-                    "name": "북구",
-                    "latitude": "35.17406",
-                    "longitude": "126.911963"
-                },
-                {
-                    "name": "서구",
-                    "latitude": "35.151969",
-                    "longitude": "126.890272"
-                }
-            ],
-            "인천광역시": [
-                {
-                    "name": "계양구",
-                    "latitude": "37.5374147",
-                    "longitude": "126.7377757"
-                },
-                {
-                    "name": "남동구",
-                    "latitude": "37.447342",
-                    "longitude": "126.731488"
-                },
-                {
-                    "name": "동구",
-                    "latitude": "37.4738846",
-                    "longitude": "126.6432125"
-                },
-                {
-                    "name": "미추홀구",
-                    "latitude": "37.4635229",
-                    "longitude": "126.6505841"
-                },
-                {
-                    "name": "부평구",
-                    "latitude": "37.5070563",
-                    "longitude": "126.7218378"
-                },
-                {
-                    "name": "서구",
-                    "latitude": "37.545449",
-                    "longitude": "126.675994"
-                },
-                {
-                    "name": "연수구",
-                    "latitude": "37.4101675",
-                    "longitude": "126.67828"
-                },
-                {
-                    "name": "중구",
-                    "latitude": "37.473781",
-                    "longitude": "126.621588"
-                },
-                {
-                    "name": "강화군",
-                    "latitude": "37.746498",
-                    "longitude": "126.488052"
-                },
-                {
-                    "name": "옹진군",
-                    "latitude": "37.446607",
-                    "longitude": "126.63676"
-                }
-            ],
-            "충청북도": [
-                {
-                    "name": "보은군",
-                    "latitude": "36.489455",
-                    "longitude": "127.729485"
-                },
-                {
-                    "name": "옥천군",
-                    "latitude": "36.3064369",
-                    "longitude": "127.5714191"
-                },
-                {
-                    "name": "제천시",
-                    "latitude": "37.132646",
-                    "longitude": "128.191037"
-                },
-                {
-                    "name": "청주시",
-                    "latitude": "36.6424987",
-                    "longitude": "127.488975"
-                },
-                {
-                    "name": "충주시",
-                    "latitude": "36.991105",
-                    "longitude": "127.926012"
-                }
-            ],
-            "서울특별시": [
-                {
-                    "name": "강남구",
-                    "latitude": "37.51714450539797",
-                    "longitude": "127.0474066999196"
-                },
-                {
-                    "name": "강동구",
-                    "latitude": "37.530126",
-                    "longitude": "127.1237708"
-                },
-                {
-                    "name": "강북구",
-                    "latitude": "37.6397819",
-                    "longitude": "127.0256135"
-                },
-                {
-                    "name": "강서구",
-                    "latitude": "37.550937",
-                    "longitude": "126.849642"
-                },
-                {
-                    "name": "관악구",
-                    "latitude": "37.4781549",
-                    "longitude": "126.9514847"
-                },
-                {
-                    "name": "광진구",
-                    "latitude": "37.538617",
-                    "longitude": "127.082375"
-                },
-                {
-                    "name": "구로구",
-                    "latitude": "37.495472",
-                    "longitude": "126.887536"
-                },
-                {
-                    "name": "금천구",
-                    "latitude": "37.4568644",
-                    "longitude": "126.8955105"
-                },
-                {
-                    "name": "노원구",
-                    "latitude": "37.654358",
-                    "longitude": "127.056473"
-                },
-                {
-                    "name": "도봉구",
-                    "latitude": "37.668768",
-                    "longitude": "127.047163"
-                },
-                {
-                    "name": "동대문구",
-                    "latitude": "37.574524",
-                    "longitude": "127.03965"
-                },
-                {
-                    "name": "동작구",
-                    "latitude": "37.51245",
-                    "longitude": "126.9395"
-                },
-                {
-                    "name": "마포구",
-                    "latitude": "37.5663245",
-                    "longitude": "126.901491"
-                },
-                {
-                    "name": "서대문구",
-                    "latitude": "37.579225",
-                    "longitude": "126.9368"
-                },
-                {
-                    "name": "서초구",
-                    "latitude": "37.483569",
-                    "longitude": "127.032598"
-                },
-                {
-                    "name": "성동구",
-                    "latitude": "37.563456",
-                    "longitude": "127.036821"
-                },
-                {
-                    "name": "성북구",
-                    "latitude": "37.5894",
-                    "longitude": "127.016749"
-                },
-                {
-                    "name": "송파구",
-                    "latitude": "37.5145636",
-                    "longitude": "127.1059186"
-                },
-                {
-                    "name": "양천구",
-                    "latitude": "37.517016",
-                    "longitude": "126.866642"
-                },
-                {
-                    "name": "영등포구",
-                    "latitude": "37.526436",
-                    "longitude": "126.896004"
-                },
-                {
-                    "name": "용산구",
-                    "latitude": "37.532527",
-                    "longitude": "126.99049"
-                },
-                {
-                    "name": "은평구",
-                    "latitude": "37.602784",
-                    "longitude": "126.929164"
-                },
-                {
-                    "name": "종로구",
-                    "latitude": "37.5735207",
-                    "longitude": "126.9788345"
-                },
-                {
-                    "name": "중구",
-                    "latitude": "37.563843",
-                    "longitude": "126.997602"
-                },
-                {
-                    "name": "중랑구",
-                    "latitude": "37.6063242",
-                    "longitude": "127.0925842"
-                }
-            ],
-            "강원특별자치도": [
-                {
-                    "name": "강릉시",
-                    "latitude": "37.752175",
-                    "longitude": "128.875836"
+                    "name": "거제시",
+                    "latitude": "34.8804572",
+                    "longitude": "128.6211703"
                 },
                 {
                     "name": "고성군",
-                    "latitude": "38.3806154",
-                    "longitude": "128.4678625"
+                    "latitude": "34.9730975",
+                    "longitude": "128.3222643"
                 },
                 {
-                    "name": "동해시",
-                    "latitude": "37.5247583",
-                    "longitude": "129.1142625"
+                    "name": "김해시",
+                    "latitude": "35.228574",
+                    "longitude": "128.889322"
                 },
                 {
-                    "name": "삼척시",
-                    "latitude": "37.4499354",
-                    "longitude": "129.1651479"
+                    "name": "남해군",
+                    "latitude": "34.837707",
+                    "longitude": "127.892475"
                 },
                 {
-                    "name": "속초시",
-                    "latitude": "38.207169",
-                    "longitude": "128.59184"
+                    "name": "밀양시",
+                    "latitude": "35.503856",
+                    "longitude": "128.746712"
                 },
                 {
-                    "name": "양구군",
-                    "latitude": "38.109992",
-                    "longitude": "127.99"
+                    "name": "사천시",
+                    "latitude": "35.0034774",
+                    "longitude": "128.0638649"
                 },
                 {
-                    "name": "양양군",
-                    "latitude": "38.075493",
-                    "longitude": "128.619145"
+                    "name": "산청군",
+                    "latitude": "35.415557",
+                    "longitude": "127.873458"
                 },
                 {
-                    "name": "영월군",
-                    "latitude": "37.183774",
-                    "longitude": "128.46185"
+                    "name": "양산시",
+                    "latitude": "35.335049",
+                    "longitude": "129.037339"
                 },
                 {
-                    "name": "원주시",
-                    "latitude": "37.3423179",
-                    "longitude": "127.9199688"
+                    "name": "의령군",
+                    "latitude": "35.3222239",
+                    "longitude": "128.261676"
                 },
                 {
-                    "name": "인제군",
-                    "latitude": "38.069732",
-                    "longitude": "128.170352"
+                    "name": "진주시",
+                    "latitude": "35.180325",
+                    "longitude": "128.107646"
                 },
                 {
-                    "name": "정선군",
-                    "latitude": "37.380609",
-                    "longitude": "128.660871"
+                    "name": "창녕군",
+                    "latitude": "35.544611",
+                    "longitude": "128.492346"
                 },
                 {
-                    "name": "철원군",
-                    "latitude": "38.146861",
-                    "longitude": "127.313472"
+                    "name": "창원시",
+                    "latitude": "35.2278771",
+                    "longitude": "128.6818746"
                 },
                 {
-                    "name": "춘천시",
-                    "latitude": "37.8813739",
-                    "longitude": "127.7300034"
+                    "name": "통영시",
+                    "latitude": "34.85439",
+                    "longitude": "128.433112"
                 },
                 {
-                    "name": "태백시",
-                    "latitude": "37.164132",
-                    "longitude": "128.985735"
+                    "name": "하동군",
+                    "latitude": "35.067333",
+                    "longitude": "127.751275"
                 },
                 {
-                    "name": "평창군",
-                    "latitude": "37.37077",
-                    "longitude": "128.390193"
+                    "name": "함안군",
+                    "latitude": "35.272315",
+                    "longitude": "128.406595"
                 },
                 {
-                    "name": "홍천군",
-                    "latitude": "37.697207",
-                    "longitude": "127.888518"
-                },
-                {
-                    "name": "화천군",
-                    "latitude": "38.106181",
-                    "longitude": "127.708216"
-                },
-                {
-                    "name": "횡성군",
-                    "latitude": "37.491803",
-                    "longitude": "127.985022"
+                    "name": "함양군",
+                    "latitude": "35.520536",
+                    "longitude": "127.725245"
                 }
             ],
-            "부산광역시": [
+            "경상북도": [
                 {
-                    "name": "강서구",
-                    "latitude": "35.2122179",
-                    "longitude": "128.98045"
+                    "name": "경산시",
+                    "latitude": "35.82509",
+                    "longitude": "128.741201"
                 },
                 {
-                    "name": "금정구",
-                    "latitude": "35.243068",
-                    "longitude": "129.0921"
+                    "name": "경주시",
+                    "latitude": "35.856242",
+                    "longitude": "129.224784"
                 },
                 {
-                    "name": "남구",
-                    "latitude": "35.136577",
-                    "longitude": "129.084163"
+                    "name": "고령군",
+                    "latitude": "35.725968",
+                    "longitude": "128.262688"
                 },
                 {
-                    "name": "동구",
-                    "latitude": "35.1292746",
-                    "longitude": "129.0453253"
+                    "name": "구미시",
+                    "latitude": "36.1195987",
+                    "longitude": "128.3443"
                 },
                 {
-                    "name": "동래구",
-                    "latitude": "35.1964382",
-                    "longitude": "129.0938569"
+                    "name": "김천시",
+                    "latitude": "36.1397714",
+                    "longitude": "128.1136148"
                 },
                 {
-                    "name": "부산진구",
-                    "latitude": "35.162913",
-                    "longitude": "129.053157"
+                    "name": "문경시",
+                    "latitude": "36.586522",
+                    "longitude": "128.186787"
                 },
                 {
-                    "name": "북구",
-                    "latitude": "35.197185",
-                    "longitude": "128.990438"
+                    "name": "봉화군",
+                    "latitude": "36.893114",
+                    "longitude": "128.732503"
                 },
                 {
-                    "name": "사상구",
-                    "latitude": "35.152624",
-                    "longitude": "128.99125"
+                    "name": "상주시",
+                    "latitude": "36.411002",
+                    "longitude": "128.159229"
                 },
                 {
-                    "name": "사하구",
-                    "latitude": "35.104585",
-                    "longitude": "128.974817"
+                    "name": "성주군",
+                    "latitude": "35.919175",
+                    "longitude": "128.282959"
                 },
                 {
-                    "name": "서구",
-                    "latitude": "35.0979321",
-                    "longitude": "129.0244125"
+                    "name": "안동시",
+                    "latitude": "36.568425",
+                    "longitude": "128.7295375"
                 },
                 {
-                    "name": "수영구",
-                    "latitude": "35.145694",
-                    "longitude": "129.113186"
+                    "name": "영덕군",
+                    "latitude": "36.415034",
+                    "longitude": "129.365267"
                 },
                 {
-                    "name": "연제구",
-                    "latitude": "35.176242",
-                    "longitude": "129.079764"
+                    "name": "영양군",
+                    "latitude": "36.6667174",
+                    "longitude": "129.1123839"
                 },
                 {
-                    "name": "영도구",
-                    "latitude": "35.091199",
-                    "longitude": "129.067875"
+                    "name": "영주시",
+                    "latitude": "36.805667",
+                    "longitude": "128.624063"
                 },
                 {
-                    "name": "중구",
-                    "latitude": "35.106214",
-                    "longitude": "129.032352"
+                    "name": "영천시",
+                    "latitude": "35.97326",
+                    "longitude": "128.938613"
                 },
                 {
-                    "name": "해운대구",
-                    "latitude": "35.163177",
-                    "longitude": "129.163634"
+                    "name": "예천군",
+                    "latitude": "36.6468844",
+                    "longitude": "128.4373552"
                 },
                 {
-                    "name": "기장군",
-                    "latitude": "35.244498",
-                    "longitude": "129.222312"
+                    "name": "울릉군",
+                    "latitude": "37.484455",
+                    "longitude": "130.905697"
+                },
+                {
+                    "name": "울진군",
+                    "latitude": "36.993087",
+                    "longitude": "129.400394"
+                },
+                {
+                    "name": "의성군",
+                    "latitude": "36.3527158",
+                    "longitude": "128.6971711"
+                },
+                {
+                    "name": "청도군",
+                    "latitude": "35.647399",
+                    "longitude": "128.733988"
+                },
+                {
+                    "name": "청송군",
+                    "latitude": "36.4362793",
+                    "longitude": "129.0571263"
+                },
+                {
+                    "name": "칠곡군",
+                    "latitude": "35.9955753",
+                    "longitude": "128.401679"
+                },
+                {
+                    "name": "포항시",
+                    "latitude": "36.0190333",
+                    "longitude": "129.3433898"
+                },
+                {
+                    "name": "독도",
+                    "latitude": "37.240255",
+                    "longitude": "131.866844"
                 }
             ],
             "전라남도": [
@@ -905,160 +974,76 @@
                     "longitude": "126.9864771"
                 }
             ],
-            "경상남도": [
+            "전라북도": [
                 {
-                    "name": "거제시",
-                    "latitude": "34.8804572",
-                    "longitude": "128.6211703"
+                    "name": "고창군",
+                    "latitude": "35.435836",
+                    "longitude": "126.701973"
                 },
                 {
-                    "name": "고성군",
-                    "latitude": "34.9730975",
-                    "longitude": "128.3222643"
+                    "name": "군산시",
+                    "latitude": "35.9676263",
+                    "longitude": "126.736875"
                 },
                 {
-                    "name": "김해시",
-                    "latitude": "35.228574",
-                    "longitude": "128.889322"
+                    "name": "김제시",
+                    "latitude": "35.8035917",
+                    "longitude": "126.8808375"
                 },
                 {
-                    "name": "남해군",
-                    "latitude": "34.837707",
-                    "longitude": "127.892475"
+                    "name": "남원시",
+                    "latitude": "35.416432",
+                    "longitude": "127.390438"
                 },
                 {
-                    "name": "밀양시",
-                    "latitude": "35.503856",
-                    "longitude": "128.746712"
+                    "name": "무주군",
+                    "latitude": "36.00681",
+                    "longitude": "127.660818"
                 },
                 {
-                    "name": "사천시",
-                    "latitude": "35.0034774",
-                    "longitude": "128.0638649"
+                    "name": "부안군",
+                    "latitude": "35.731755",
+                    "longitude": "126.733199"
                 },
                 {
-                    "name": "산청군",
-                    "latitude": "35.415557",
-                    "longitude": "127.873458"
+                    "name": "순창군",
+                    "latitude": "35.374476",
+                    "longitude": "127.137489"
                 },
                 {
-                    "name": "양산시",
-                    "latitude": "35.335049",
-                    "longitude": "129.037339"
+                    "name": "완주군",
+                    "latitude": "35.904708",
+                    "longitude": "127.162019"
                 },
                 {
-                    "name": "의령군",
-                    "latitude": "35.3222239",
-                    "longitude": "128.261676"
+                    "name": "익산시",
+                    "latitude": "35.948295",
+                    "longitude": "126.957786"
                 },
                 {
-                    "name": "진주시",
-                    "latitude": "35.180325",
-                    "longitude": "128.107646"
+                    "name": "임실군",
+                    "latitude": "35.6178286",
+                    "longitude": "127.2890774"
                 },
                 {
-                    "name": "창녕군",
-                    "latitude": "35.544611",
-                    "longitude": "128.492346"
+                    "name": "장수군",
+                    "latitude": "35.647366",
+                    "longitude": "127.5215208"
                 },
                 {
-                    "name": "창원시",
-                    "latitude": "35.2278771",
-                    "longitude": "128.6818746"
+                    "name": "전주시",
+                    "latitude": "35.824171",
+                    "longitude": "127.14805"
                 },
                 {
-                    "name": "통영시",
-                    "latitude": "34.85439",
-                    "longitude": "128.433112"
+                    "name": "정읍시",
+                    "latitude": "35.569867",
+                    "longitude": "126.856038"
                 },
                 {
-                    "name": "하동군",
-                    "latitude": "35.067333",
-                    "longitude": "127.751275"
-                },
-                {
-                    "name": "함안군",
-                    "latitude": "35.272315",
-                    "longitude": "128.406595"
-                },
-                {
-                    "name": "함양군",
-                    "latitude": "35.520536",
-                    "longitude": "127.725245"
-                }
-            ],
-            "대구광역시": [
-                {
-                    "name": "남구",
-                    "latitude": "35.846",
-                    "longitude": "128.597486"
-                },
-                {
-                    "name": "달서구",
-                    "latitude": "35.8298667",
-                    "longitude": "128.5327375"
-                },
-                {
-                    "name": "동구",
-                    "latitude": "35.886664",
-                    "longitude": "128.635609"
-                },
-                {
-                    "name": "북구",
-                    "latitude": "35.885684",
-                    "longitude": "128.582947"
-                },
-                {
-                    "name": "서구",
-                    "latitude": "35.871757",
-                    "longitude": "128.559175"
-                },
-                {
-                    "name": "수성구",
-                    "latitude": "35.8581654",
-                    "longitude": "128.630625"
-                },
-                {
-                    "name": "중구",
-                    "latitude": "35.8693404",
-                    "longitude": "128.6062"
-                },
-                {
-                    "name": "군위군",
-                    "latitude": "36.242945",
-                    "longitude": "128.572657"
-                },
-                {
-                    "name": "달성군",
-                    "latitude": "35.7746",
-                    "longitude": "128.431445"
-                }
-            ],
-            "대전광역시": [
-                {
-                    "name": "대덕구",
-                    "latitude": "36.346735",
-                    "longitude": "127.415502"
-                },
-                {
-                    "name": "동구",
-                    "latitude": "36.312169",
-                    "longitude": "127.454884"
-                },
-                {
-                    "name": "서구",
-                    "latitude": "36.355504",
-                    "longitude": "127.383844"
-                },
-                {
-                    "name": "유성구",
-                    "latitude": "36.3623219",
-                    "longitude": "127.3562683"
-                },
-                {
-                    "name": "중구",
-                    "latitude": "36.3256594",
-                    "longitude": "127.4215464"
+                    "name": "진안군",
+                    "latitude": "35.7917621",
+                    "longitude": "127.424875"
                 }
             ],
             "충청남도": [
@@ -1138,16 +1123,31 @@
                     "longitude": "126.660775"
                 }
             ],
-            "제주특별자치도": [
+            "충청북도": [
                 {
-                    "name": "서귀포시",
-                    "latitude": "33.253925",
-                    "longitude": "126.5597875"
+                    "name": "보은군",
+                    "latitude": "36.489455",
+                    "longitude": "127.729485"
                 },
                 {
-                    "name": "제주시",
-                    "latitude": "33.499568",
-                    "longitude": "126.531138"
+                    "name": "옥천군",
+                    "latitude": "36.3064369",
+                    "longitude": "127.5714191"
+                },
+                {
+                    "name": "제천시",
+                    "latitude": "37.132646",
+                    "longitude": "128.191037"
+                },
+                {
+                    "name": "청주시",
+                    "latitude": "36.6424987",
+                    "longitude": "127.488975"
+                },
+                {
+                    "name": "충주시",
+                    "latitude": "36.991105",
+                    "longitude": "127.926012"
                 }
             ]
         }

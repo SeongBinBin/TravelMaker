@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,6 +29,7 @@ function StackNavigator(){
   const [isLoggedin, setIsLoggedin] = useState(false)
 
   useEffect(() => {
+    
     const currentUser = auth().currentUser
 
     function onResult(querySnapshot){
@@ -79,7 +80,7 @@ function StackNavigator(){
                           )
     }
 
-
+  
   }, [])
 
   if(loading){
