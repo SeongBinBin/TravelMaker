@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, StatusBar, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, StatusBar, TouchableOpacity, Alert, TextInput, Image } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { removeWhitespace } from '../utils/until';
 import Colors from '../Styles/Colors';
+import Icon from 'react-native-vector-icons/Ionicons'
+import ProgressBar from '../Components/Profile/ProgressBar';
+import { useIsFocused } from '@react-navigation/native';
 
 function SettingPage() {
   const navigation = useNavigation()
@@ -19,6 +22,8 @@ function SettingPage() {
   const [errorPasswordCheckMessage, setErrorPasswordCheckMessage] = useState('')
   const [openPasswordModal, setOpenPasswordModal] = useState(false)
   const [changeBtn, setChangeBtn] = useState(false)
+  const isFocused = useIsFocused()
+
 
   const logOutAlert = () => {
     Alert.alert(
@@ -134,6 +139,7 @@ function SettingPage() {
   }
 
   useEffect(() => {
+    if(isFocused){
     // Firebase에서 현재 로그인한 사용자 정보 가져오기
     const currentUser = auth().currentUser;
     // console.log(currentUser)
@@ -148,7 +154,12 @@ function SettingPage() {
             // 문서가 존재하면 이름 값을 설정
             const userData = doc.data();
             setUserName(userData.name);
-            setUserBirth(userData.birth)
+
+            var yearform = userData.birth.substr(0, 4)
+            var monthform = userData.birth.substr(4, 2)
+            var dayform = userData.birth.substr(6, 2)
+            const birthform = yearform + '년 ' + monthform + '월 ' + dayform + '일'
+            setUserBirth(birthform)
           } else {
             console.log('No such document!');
           }
@@ -181,26 +192,50 @@ function SettingPage() {
     }else{
       setChangeBtn(false)
     }
-  }, [changePassword, changePasswordMatch, errorPasswordCheckMessage]);
+  }
+  }, [isFocused, changePassword, changePasswordMatch, errorPasswordCheckMessage]);
   
   return (
     <SafeAreaView style={styles.block}>
       <View style={styles.settingContainer}>
         <View style={styles.userContainer}>
           <View style={styles.userImg}>
-
+            <Image source={require('../Assets/Imgs/userImg.jpg')} style={styles.img} />
           </View>
           <View style={styles.userTextBox}>
             <Text style={styles.userText}>{`${userName}님의 정보`}</Text>
+
+            <View style={{marginBottom: 10,}}>
+              <View style={{flexDirection: 'row', gap: 10}}>
+                <Text style={[styles.userInfoText, {textAlign: 'right', width: 70,}]}>생년월일</Text>
+                <Text style={[styles.userInfoText, {width: 150, }]}>{userBirth}</Text>
+              </View>
+              <View style={{flexDirection: 'row', gap: 10}}>
+                <Text style={[styles.userInfoText, {textAlign: 'right', width: 70,}]}>이메일</Text>
+                <Text style={[styles.userInfoText, {width: 150, }]}>{userEmail}</Text>
+              </View>
+            </View>
+
+            <View style={{position: 'absolute', right: 0, bottom: 0, }}>
+              <View>
+                <TouchableOpacity onPress={openChangePassword}>
+                  <Text style={{fontSize: 12, fontFamily: 'SUIT', fontWeight: 'bold', textAlign: 'right'}}>비밀번호 변경</Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity onPress={deleteAlert}>
+                  <Text style={{fontSize: 12, fontFamily: 'SUIT', fontWeight: 'bold', textAlign: 'right'}}>회원탈퇴</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
 
-        <TouchableOpacity onPress={openChangePassword}>
-            <Text>비밀번호 변경</Text>
-        </TouchableOpacity>
-
         <View style={[styles.changePasswordContainer, {display: openPasswordModal? 'flex': 'none'}]}>
           <View style={{gap: 15,}}>
+            <TouchableOpacity onPress={openChangePassword}>
+              <Icon name="close-outline" size={25} style={styles.changePasswordClose}/>
+            </TouchableOpacity>
             <View style={{gap: 3}}>
               <Text style={styles.changePasswordText}>비밀번호</Text>
               <TextInput 
@@ -238,16 +273,13 @@ function SettingPage() {
           </View>
         </View>
 
-        <View>
-          <TouchableOpacity onPress={deleteAlert}>
-            <Text>회원탈퇴</Text>
-          </TouchableOpacity>
-        </View>
+        <ProgressBar />
 
         <TouchableOpacity style={styles.logOut} onPress={logOutAlert}>
           <Text style={{textAlign: 'center', fontFamily: 'SUIT', fontWeight: 'bold'}}>로그아웃</Text>
         </TouchableOpacity>
       </View>
+      
     </SafeAreaView>
   );
 }
@@ -259,27 +291,42 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   settingContainer: {
+    position: 'relative',
+    alignItems: 'center',
     height: '100%',
     flex: 1,
   },
   userContainer: {
     height: 150,
-    borderWidth: 1,
+    borderWidth: .5,
     flexDirection: 'row',
   },
   userImg: {
-    borderWidth: 1,
+    borderWidth: .5,
     width: '40%',
   },
+  img: {
+    width: '100%',
+    height: '100%',
+  },
   userTextBox: {
-    borderWidth: 1,
+    borderWidth: .5,
     width: '60%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   userText: {
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'SUIT',
     fontWeight: 'bold',
+    color: Colors.black,
+    marginBottom: 10,
+  },
+  userInfoText: {
+    fontFamily: 'SUIT',
+    fontWeight: 'bold',
+    color: Colors.black,
   },
   settingBtns: {
     flexDirection: 'row',
@@ -288,7 +335,7 @@ const styles = StyleSheet.create({
     // height: '100%',
   },
   logOut: {
-    position: 'absolute',
+    position: 'relative',
     width: '100%',
     bottom: 0,
     padding: 10,
@@ -297,12 +344,19 @@ const styles = StyleSheet.create({
     opacity: .8,
   },
   changePasswordContainer: {
-    width: '95%',
-    paddingTop: 20, paddingBottom: 20,
-    paddingLeft: 10, paddingRight: 10,
-    borderRadius: 10,
+    position: 'absolute',
+    bottom: 0,
+    zIndex: 1,
+    width: '100%',
+    padding: 20,
     backgroundColor: Colors.lightgray,
-    marginLeft: 'auto', marginRight: 'auto',
+    marginTop: 10,
+  },
+  changePasswordClose: {
+    position: 'absolute',
+    top: -10,
+    right: 0,
+    color: Colors.black,
   },
   changePasswordText: {
     color: Colors.black,
