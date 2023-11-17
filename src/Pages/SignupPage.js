@@ -27,6 +27,8 @@ function SignupPage() {
             Alert.alert('이름을 입력해주세요.')
         }else if(birth === ''){
             Alert.alert('생년월일을 입력해주세요.')
+        }else if(birth.length < 8){
+            Alert.alert('생년월일의 형식을 확인해주세요.')
         }else if(password === ''){
             Alert.alert('비밀번호를 입력해주세요.')
         }else if(errorPasswordCheckMessage === false){
@@ -136,10 +138,10 @@ function SignupPage() {
                 <View style={styles.signupBox}>
                     <Text style={styles.signupText}>생년월일</Text>
                     <TextInput
-                    placeholder="생년월일을 입력해주세요. (ex. 990101)"
+                    placeholder="생년월일을 입력해주세요. (ex. 19990101)"
                     value={birth}
                     onChangeText={(text) => setBirth(removeWhitespace(text))}
-                    maxLength={6}
+                    maxLength={8}
                     style={styles.signupInput}
                     placeholderTextColor={Colors.gray}
                     keyboardType= 'number-pad'

@@ -116,7 +116,7 @@ function IDPWSearchPage() {
                         <View style={styles.searchBox}>
                             <Text style={styles.searchText}>생년월일</Text>
                             <TextInput
-                                placeholder="생년월일을 입력해주세요. (ex. 990101)"
+                                placeholder="생년월일을 입력해주세요. (ex. 19990101)"
                                 value={idBirth}
                                 onChangeText={(text) => setIdBirth(removeWhitespace(text))}
                                 style={styles.searchInput}
@@ -160,11 +160,11 @@ function IDPWSearchPage() {
                         <View style={styles.searchBox}>
                             <Text style={styles.searchText}>생년월일</Text>
                             <TextInput
-                                placeholder="생년월일을 입력해주세요. (ex. 990101)"
+                                placeholder="생년월일을 입력해주세요. (ex. 19990101)"
                                 value={passwordBirth}
                                 onChangeText={(text) => setPasswordBirth(removeWhitespace(text))}
                                 style={styles.searchInput}
-                                maxLength={6}
+                                maxLength={8}
                                 placeholderTextColor={Colors.gray}
                                 keyboardType= 'number-pad'
                                 ref={(input) => {this.passwordBirth = input}}

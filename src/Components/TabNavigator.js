@@ -96,8 +96,8 @@ function TabNavigator({ navigation, route }){
           tabBarIcon: ({color, size}) => <Icon name="map" color={color} size={size}/>
         }}/> */}
         <Tab.Screen name="Setting" component={SettingPage} options={{
-          title: '설정',
-          tabBarIcon: ({color, size}) => <Icon name="settings" color={color} size={size}/>
+          title: '프로필',
+          tabBarIcon: ({color, size}) => <Icon name="person-outline" color={color} size={size}/>
         }}/>
       </Tab.Navigator>
   )
