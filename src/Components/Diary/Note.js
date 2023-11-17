@@ -44,6 +44,7 @@ function Note({ route, navigation, records }){
   const [ changeLongitude, setChangeLongitude ] = useState('')
 
   useEffect(() => {
+    const user = auth().currentUser
 
     if(route.params !== undefined && route.params.page === 'Map'){
       fromMap(route.params);
@@ -63,6 +64,9 @@ function Note({ route, navigation, records }){
   }
 
   const fromCalendar = (data) => {
+
+    console.log(data)
+
     setSelectedYear(data.selectedYear)
     setSelectedMonth(data.selectedMonth)
     setSelectedDate(data.selectedDate)
@@ -122,7 +126,7 @@ function Note({ route, navigation, records }){
       .catch(error => console.error(error))
 
     }
-    moveToback();
+    moveToMain();
   }
 
   const editData = async (user) => {
@@ -146,8 +150,7 @@ function Note({ route, navigation, records }){
     await updateData(`UserData/${user.uid}/MapData`, route.params.calendar.selectedId, {
       title,
       contents,
-      latitude,
-      longitude,
+      regionFullName: placeName === ''? regionFullName : placeName,
     })
     .catch(error => console.error(error))
 
@@ -195,10 +198,14 @@ function Note({ route, navigation, records }){
 
   }
 
+  const moveToMain = () => {
+    navigation.reset({ routes: [{name : "Calendar"}]})
+  }
+
   const moveToMap = () => {
 
-    navigation.navigate('Main', {
-      screen: 'Home',
+    navigation.navigate("Main", {
+      screen: "Home",
       params: {
         selectedYear,
         selectedMonth,

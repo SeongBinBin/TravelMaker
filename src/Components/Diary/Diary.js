@@ -22,8 +22,7 @@ function Diary({
         selectedMonth,
         selectedDate,
         selectedId,
-        isEdit,
-        records
+        isEdit
       },
     })
   }
