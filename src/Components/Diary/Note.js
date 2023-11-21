@@ -197,7 +197,7 @@ function Note({ route, navigation, records }){
   }
 
   const moveToMain = () => {
-    navigation.reset({ routes: [{name : "Calendar"}]})
+    navigation.reset({ routes: [{name : "Main"}]})
   }
 
   const moveToMap = () => {

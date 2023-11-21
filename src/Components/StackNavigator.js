@@ -14,6 +14,7 @@ import LandingPage from "../Pages/LandingPage";
 import SignupPage from "../Pages/SignupPage";
 import IDPWSearchPage from "../Pages/IDPWSearchPage";
 import Note from "./Diary/Note";
+import NoteFromMap from "./Diary/NoteFromMap";
 
 import { getCollection } from "../apis/firebase"
 import auth from '@react-native-firebase/auth';
@@ -79,42 +80,76 @@ function StackNavigator(){
                             null
                           )
     }
-
   
   }, [])
 
-  if(loading){
-    return (
+  if(isLoggedin){
+    if(loading){
+      return (
         <View style={styles.block}>
           <ActivityIndicator size="large" color="#0047ab"/>
           <Text style={styles.loadingText}>loading...</Text>
         </View>
-    )
-  }
+      )
+    }else{
+      return(
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName = {isLoggedin? "Main": "Landing"} screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Main"
+              component={TabNavigator}
+              initialParams={{records, createdAt}}
+            />
+            <Stack.Screen name="Map" component={KakaoMap}/>
+            <Stack.Screen name="KoreaMap" component={KoreaMap}/>
+            <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}}/>
+            <Stack.Screen name="Calendar" component={Calendar}/>
+            <Stack.Screen name="Landing" component={LandingPage}/>
+            <Stack.Screen name="Login" component={LoginPage}/>
+            <Stack.Screen name="Signup" component={SignupPage}/>
+            <Stack.Screen name="IDPWSearch" component={IDPWSearchPage}/>
+            <Stack.Screen name="Note"
+              children={(props) => 
+                <Note {...props} records={records}/>
+              }
+            />
+            <Stack.Screen name="NoteFromMap"
+              children={(props) => 
+                <NoteFromMap {...props} records={records}/>
+              }
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      )
+    }
+  }else{
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
 
-  return(
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName = {isLoggedin? "Main": "Landing"} screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Main"
-          component={TabNavigator}
-          initialParams={{records, createdAt}}
-        />
-        <Stack.Screen name="Map" component={KakaoMap}/>
-        <Stack.Screen name="KoreaMap" component={KoreaMap}/>
-        <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}}/>
-        <Stack.Screen name="Calendar" component={Calendar}/>
-        <Stack.Screen name="Landing" component={LandingPage}/>
-        <Stack.Screen name="Login" component={LoginPage}/>
-        <Stack.Screen name="Signup" component={SignupPage}/>
-        <Stack.Screen name="IDPWSearch" component={IDPWSearchPage}/>
-        <Stack.Screen name="Note"
-          children={(props) => 
-            <Note {...props} records={records}/>
-          }
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+    return(
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName = {isLoggedin? "Main": "Landing"} screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Main"
+            component={TabNavigator}
+            initialParams={{records, createdAt}}
+          />
+          <Stack.Screen name="Map" component={KakaoMap}/>
+          <Stack.Screen name="KoreaMap" component={KoreaMap}/>
+          <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}}/>
+          <Stack.Screen name="Calendar" component={Calendar}/>
+          <Stack.Screen name="Landing" component={LandingPage}/>
+          <Stack.Screen name="Login" component={LoginPage}/>
+          <Stack.Screen name="Signup" component={SignupPage}/>
+          <Stack.Screen name="IDPWSearch" component={IDPWSearchPage}/>
+          <Stack.Screen name="Note"
+            children={(props) => 
+              <Note {...props} records={records}/>
+            }
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  }  
 }
 
 const styles = StyleSheet.create({

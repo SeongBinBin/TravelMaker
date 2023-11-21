@@ -13,6 +13,7 @@ import { calendarStyles } from '../Styles/CalendarPageStyle'
 
 function CalendarScreen({ records, createdAt, navigation, route }){
 
+
   const today = getFullCalendar(new Date())
   
   const [ selectedYear, setSelectedYear ] = useState(today.year)

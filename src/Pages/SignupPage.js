@@ -21,10 +21,15 @@ function SignupPage() {
     const [changeBtn, setChangeBtn] = useState(false)
 
     const register = async () => {
+        const userRef = firestore().collection('UserData')
+        const querySnapshot = await userRef.where('name', '==', name).get()
+
         if(email === ''){
             Alert.alert('이메일을 입력해주세요.')
         }else if(name === ''){
-            Alert.alert('이름을 입력해주세요.')
+            Alert.alert('이름 / 닉네임을 입력해주세요.')
+        }else if(!querySnapshot.empty){
+            Alert.alert('이미 사용중인 이름 / 닉네임입니다.')
         }else if(birth === ''){
             Alert.alert('생년월일을 입력해주세요.')
         }else if(birth.length < 8){
@@ -35,16 +40,15 @@ function SignupPage() {
             Alert.alert('비밀번호가 일치하지 않습니다.')
         }else{
             try {
-                const userAdd = await auth().createUserWithEmailAndPassword(registerEmail, registerPassword)
-                const user = userAdd.user
-                const uid = user.uid
+                // const userAdd = await auth().createUserWithEmailAndPassword(registerEmail, registerPassword)
+                // const user = userAdd.user
+                // const uid = user.uid
 
-                await saveUserDataToFirestore(uid)
+                // await saveUserDataToFirestore(uid)
 
                 Alert.alert('회원가입 성공!')
                 navigation.navigate('Login')
               } catch(error) {
-                // console.log(error.code)
                 switch (error.code) {
                     case 'auth/invalid-email':
                         Alert.alert('이메일 형식을 지켜주세요.')
@@ -123,7 +127,7 @@ function SignupPage() {
                 <View style={styles.signupBox}>
                     <Text style={styles.signupText}>이름</Text>
                     <TextInput
-                    placeholder="이름을 입력해주세요."
+                    placeholder="이름 / 닉네임을 입력해주세요."
                     value={name}
                     onChangeText={(text) => setName(removeWhitespace(text))}
                     maxLength={10}
