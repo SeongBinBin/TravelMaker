@@ -68,16 +68,17 @@ function ProgressBar() {
 
   const renderRegionItem = ({ item: region, index }) => {
     const regionOccurrences = countRegionOccurrences(region);
-    const progressPercentage = ((regionOccurrences / saveTravelNum).toFixed(1) * 100);
+    const progressPercentage = ((regionOccurrences / saveTravelNum).toFixed(4) * 100);
+    const roundDecimal = Math.round(progressPercentage)   // 소수점을 반올림
 
     return (
       <View key={index} style={[styles.regionBox, 
         {display: progressPercentage === 0? 'none': 'flex'}]}>
         <View style={styles.regionTextBox}>
           <Text style={styles.regionText}>{region}</Text>
-          <Text style={styles.percentage}>{`${progressPercentage}%`}</Text>
+          <Text style={styles.percentage}>{`${roundDecimal}%`}</Text>
         </View>
-        <CustomProgressBar progress={progressPercentage / 100} />
+        <CustomProgressBar progress={roundDecimal / 100} />
       </View>
     );
   };

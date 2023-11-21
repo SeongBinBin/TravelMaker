@@ -69,7 +69,7 @@ function KoreaMap({ route }) {
             const userUID = currentUser.uid            
             getCollection(`UserData/${userUID}/MapData`, getRegion)
         }
-    }
+        }
     }, [isFocused])
 
     const checkClicked = () => {
@@ -96,7 +96,7 @@ function KoreaMap({ route }) {
                             <TouchableOpacity
                                 style={[
                                     styles.item,
-                                    getRegionData.includes(item) && { backgroundColor: Colors.skyblue }
+                                    // getRegionData.includes(item) && { backgroundColor: Colors.skyblue }
                                 ]}
                                 onPress={() => {
                                     handleRegionClick(item);
@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
         borderBottomColor: Colors.gray,
     },
     regionText: {
-        fontFamily: 'BMDOHYEON',
-        fontWeight: 'normal',
+        fontFamily: 'SUIT',
+        fontWeight: 'bold',
         fontSize: 20,
         paddingTop: 10, paddingBottom: 10,
         color: Colors.black,
@@ -168,8 +168,8 @@ const styles = StyleSheet.create({
         borderBottomColor: Colors.darkgray,
     },
     regionItemText: {
-        fontFamily: 'BMDOHYEON',
-        fontWeight: 'normal',
+        fontFamily: 'SUIT',
+        fontWeight: 'bold',
         fontSize: 15,
         padding: 10,
         color: Colors.black,

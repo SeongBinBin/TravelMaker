@@ -104,7 +104,7 @@ function IDPWSearchPage() {
                         <View style={styles.searchBox}>
                             <Text style={styles.searchText}>이름</Text>
                             <TextInput
-                                placeholder="이름을 입력해 주세요."
+                                placeholder="이름 / 닉네임을 입력해 주세요."
                                 value={idName}
                                 onChangeText={(text) => setIdName(removeWhitespace(text))}
                                 style={styles.searchInput}
@@ -148,7 +148,7 @@ function IDPWSearchPage() {
                         <View style={styles.searchBox}>
                             <Text style={styles.searchText}>이름</Text>
                             <TextInput
-                                placeholder="이름을 입력해 주세요."
+                                placeholder="이름 / 닉네임을 입력해 주세요."
                                 value={passwordName}
                                 onChangeText={(text) => setPasswordName(removeWhitespace(text))}
                                 style={styles.searchInput}
