@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, View, Text, Pressable, SafeAreaView, StatusBar } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 
 import { getFullCalendar } from '../Components/Calendar/time'
 import { addData, removeData, updateData } from '../apis/firebase'
 import auth from '@react-native-firebase/auth';
+import { getCollection } from '../apis/firebase';
+import moment from 'moment';
 
 import Calendar from '../Components/Calendar/Calendar'
 import Diary from '../Components/Diary/Diary'
@@ -11,8 +14,9 @@ import Note from '../Components/Diary/Note'
 import { calendarStyles } from '../Styles/CalendarPageStyle'
 
 
-function CalendarScreen({ records, createdAt, navigation, route }){
+function CalendarScreen({ navigation, route }){
 
+  const isFocused = useIsFocused();
 
   const today = getFullCalendar(new Date())
   
@@ -24,17 +28,49 @@ function CalendarScreen({ records, createdAt, navigation, route }){
 
   const [ selectedId, setSelectedId ] = useState('')
 
+  const [ records, setRecords ] = useState([])
+  const [ loading, setLoading ] = useState(true)
+  const [ createdAt, setCreatedAt ] = useState([])
 
-  // useEffect(() => {
+  useEffect(() => {
+    if(isFocused){
+      const currentUser = auth().currentUser
 
-  //   if(route.params !== undefined){
-  //     setSelectedYear(route.params.selectedYear)
-  //     setSelectedMonth(route.params.selectedMonth)
-  //     setSelectedDate(route.params.selectedDate)
-  //     setSelectedId(route.params.selectedId)
-  //   }
-
-  // }, [route])
+      function onResult(querySnapshot){
+        const list = []
+        const date = []
+        querySnapshot.forEach(doc => {
+          list.push({
+            ...doc.data(),
+            id: doc.id,
+          })
+          list.forEach((data) => {
+            if(data.createdAt !== null){
+              date.push(moment(data.createdAt.toDate()).format('YYYY-MM-DD'))
+            }
+          })
+        })
+  
+        setRecords(list)
+        setLoading(false)
+        setCreatedAt(date)
+      }
+  
+      function onError(error){
+        console.error(`${error} occured when reading records`)
+      }
+  
+      if(currentUser){
+        const userUID = currentUser.uid
+        return getCollection(`UserData/${userUID}/MapData`,
+                              onResult, onError,
+                              null,
+                              {exists: true, condition: ['createdAt', 'asc']},
+                              null
+                            )
+      }
+    }
+  }, [isFocused])
 
   useEffect(() => {
     if(today.date < 10){

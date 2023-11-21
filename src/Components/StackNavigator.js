@@ -95,13 +95,9 @@ function StackNavigator(){
       return(
         <NavigationContainer>
           <Stack.Navigator initialRouteName = {isLoggedin? "Main": "Landing"} screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Main"
-              component={TabNavigator}
-              initialParams={{records, createdAt}}
-            />
+            <Stack.Screen name="Main" component={TabNavigator}/>
             <Stack.Screen name="Map" component={KakaoMap}/>
             <Stack.Screen name="KoreaMap" component={KoreaMap}/>
-            <Stack.Screen name="TravelRecord" component={TravelRecord} initialParams={{records, createdAt}}/>
             <Stack.Screen name="Calendar" component={Calendar}/>
             <Stack.Screen name="Landing" component={LandingPage}/>
             <Stack.Screen name="Login" component={LoginPage}/>
