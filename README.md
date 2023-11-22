@@ -49,10 +49,16 @@
 <img src="https://img.shields.io/badge/Figma-f24e1e?style=for-the-badge&logo=figma&logoColor=white">
 
 ### version
-node - v20.9.0<br/>
-npm - 10.1.0<br/>
-react native (cli) - 11.3.7<br/>
+node - v20.9.0 <br/>
+npm - 10.1.0 <br/>
+react native (cli) - 11.3.7 <br/>
 adb - 1.0.41
+
+### 주요 모듈
+[react-native](https://www.npmjs.com/package/react-native) : 0.72.6 <br/>
+[@react-navigation/native](https://www.npmjs.com/package/@react-navigation/native) : ^6.1.9 <br/>
+[@react-native-firebase/firestore](https://www.npmjs.com/package/@react-native-firebase/firestore) : ^18.5.0 <br/>
+[@react-native-firebase/auth](https://www.npmjs.com/package/@react-native-firebase/auth) : ^18.5.0
 
 ## WebView
 
