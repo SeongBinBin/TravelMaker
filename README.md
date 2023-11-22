@@ -40,7 +40,18 @@
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 
 #### 의사소통
-<img src="https://img.shields.io/badge/Figma-f24e1e?style=for-the-badge&logo=figma&logoColor=white"> 
+<img src="https://img.shields.io/badge/Figma-f24e1e?style=for-the-badge&logo=figma&logoColor=white">
+
+## WebView
+
+지도 구현 부분을 리액트 네이티브에서 카카오맵 API로 구현할 예정이였으나,
+리액트 네이티브에서 사용할 카카오맵 API가 존재하지 않아서
+
+리액트 프로젝트에서 카카오맵 API를 불러와서 사용하고,
+
+리액트 네이티브의 WebView 기능을 활용하여 리액트 네이티브에서 지도 기능을 구현하였습니다.
+
+[지도 기능을 구현한 리액트 (GitHub)](https://github.com/SeongBinBin/RN_Map)
 
 ## 시연 영상
 https://github.com/SeongBinBin/TravelMaker/assets/132800670/6023516b-eabc-4b9c-93f4-8c16b71422e7
