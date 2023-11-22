@@ -1,12 +1,14 @@
 import React from 'react'
 import { SafeAreaView, View, Text, StyleSheet, StatusBar } from 'react-native'
 
-function MainPage(){
+import KoreaMap from '../Components/Map/KoreaMap'
+
+function MainPage({ route }){
   return (
     <SafeAreaView style={styles.block}>
-      <StatusBar backgroundColor="#a8c8ffff"></StatusBar>
+      <StatusBar></StatusBar>
       <View>
-        <Text>메인</Text>
+        <KoreaMap route={route}/>
       </View>
     </SafeAreaView>
   )
@@ -14,7 +16,7 @@ function MainPage(){
 
 const styles = StyleSheet.create({
   block: {
-    flex: 1
-  }
+    flex: 1,
+  },
 })
 export default MainPage

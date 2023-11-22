@@ -2,7 +2,7 @@ const Colors = {
     white: '#FFFFFF',
     black: '#000000',
     blue: '#0096FF',
-    skyblue: '#89CEEB',
+    skyblue: '#00BFFE',
     gray: '#989898',
     lightgray: '#EFEFEF',
     darkgray: '#A9A9A9',
@@ -12,6 +12,6 @@ const Colors = {
     green: '#34C85A',
     pink: '#FFC0CB',
     orange: '#FFA500',
-
+    bluepurple: '#a8c9ff',
 }
 export default Colors
