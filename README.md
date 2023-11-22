@@ -42,29 +42,6 @@
 #### 의사소통
 <img src="https://img.shields.io/badge/Figma-f24e1e?style=for-the-badge&logo=figma&logoColor=white"> 
 
-## 커밋 컨벤션
-
-1. 태그 이름
-- Feat	새로운 기능을 추가할 경우
-- Fix	버그를 고친 경우
-- Design	CSS 등 사용자 UI 디자인 변경
-- !BREAKING CHANGE	커다란 API 변경의 경우
-- !HOTFIX	급하게 치명적인 버그를 고쳐야하는 경우
-- Style	코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우
-- Refactor	프로덕션 코드 리팩토링
-- Comment	필요한 주석 추가 및 변경
-- Docs	문서를 수정한 경우
-- Test	테스트 추가, 테스트 리팩토링(프로덕션 코드 변경 X)
-- Chore	빌드 태스트 업데이트, 패키지 매니저를 설정하는 경우(프로덕션 코드 변경X)
-- Rename	파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
-- Remove	파일을 삭제하는 작업만 수행한 경우
-
-2. 커밋 작성 방식
-- Feat: 지도 기능 추가
-  - 설명 작성해서 올리기
-
-3. 커밋 타이밍은 기능 단위로 하되, 급하게 연결이 필요한 경우나 문제를 수정한 경우는 바로 커밋
-
 ## 시연 영상
 https://github.com/SeongBinBin/TravelMaker/assets/132800670/6023516b-eabc-4b9c-93f4-8c16b71422e7
 
