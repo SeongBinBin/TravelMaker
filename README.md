@@ -55,6 +55,7 @@ react native (cli) - 11.3.7 <br/>
 adb - 1.0.41
 
 ### 주요 모듈
+# link define
 [react-native](https://www.npmjs.com/package/react-native) : 0.72.6 <br/>
 [@react-navigation/native](https://www.npmjs.com/package/@react-navigation/native) : ^6.1.9 <br/>
 [@react-native-firebase/firestore](https://www.npmjs.com/package/@react-native-firebase/firestore) : ^18.5.0 <br/>
