@@ -49,12 +49,10 @@
 <img src="https://img.shields.io/badge/Figma-f24e1e?style=for-the-badge&logo=figma&logoColor=white">
 
 ### version
-<div style="display: flex; flex-direction: column;">
-node - v20.9.0
-npm - 10.1.0
-react native (cli) - 11.3.7
+node - v20.9.0<br/>
+npm - 10.1.0<br/>
+react native (cli) - 11.3.7<br/>
 adb - 1.0.41
-</div>
 
 ## WebView
 
