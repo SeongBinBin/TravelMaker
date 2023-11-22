@@ -65,3 +65,6 @@
 
 3. 커밋 타이밍은 기능 단위로 하되, 급하게 연결이 필요한 경우나 문제를 수정한 경우는 바로 커밋
 
+## 시연 영상
+https://github.com/SeongBinBin/TravelMaker/assets/132800670/6023516b-eabc-4b9c-93f4-8c16b71422e7
+
