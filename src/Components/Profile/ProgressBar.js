@@ -68,6 +68,7 @@ function ProgressBar() {
 
   const renderRegionItem = ({ item: region, index }) => {
     const regionOccurrences = countRegionOccurrences(region);
+    // const progressPercentage = 'NaN'? 0: ((regionOccurrences / saveTravelNum).toFixed(4) * 100);
     const progressPercentage = ((regionOccurrences / saveTravelNum).toFixed(4) * 100);
     const roundDecimal = Math.round(progressPercentage)   // 소수점을 반올림
 

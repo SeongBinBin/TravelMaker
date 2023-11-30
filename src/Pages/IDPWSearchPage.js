@@ -120,7 +120,7 @@ function IDPWSearchPage() {
                                 value={idBirth}
                                 onChangeText={(text) => setIdBirth(removeWhitespace(text))}
                                 style={styles.searchInput}
-                                maxLength={6}
+                                maxLength={8}
                                 placeholderTextColor={Colors.gray}
                                 keyboardType= 'number-pad'
                                 ref={(input) => {this.idBirth = input}}
